@@ -1,5 +1,6 @@
 html, body {
   background: #ADC0C9 0% 0% no-repeat padding-box;
+  background-image: url("/images/Diseño sin título (2).png");
   opacity: 1;
   height: 100% ; /*Viewport height*/
   margin: 0;
@@ -12,6 +13,7 @@ html, body {
 #root{ /* Altura de la pantalla para las segundas pantallas, no la HomePage*/
   height: 100%;
 }
+
 .grid-container {
   display: grid;
   grid-template-areas:
@@ -30,58 +32,75 @@ html, body {
   padding: 1.5rem; 
 }
 
-li {
+
+li{
   list-style-type: none;
+  margin: .2rem;
+}
+
+/* SearchContainer */
+.searchbox{
+  display: "grid";
+  flex-wrap: wrap;
+  background: #143E52;
+  border-radius: 20px;
+  opacity: 1;
+  padding: 45px;
+  margin-top: 150px;
+  
+  }
+/* Serchbox-content */
+.form-container{
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: .1rem;
+  padding: .1rem;
+  align-items: center;
 }
 
 .search-button{
   padding: 1rem;
-  background-color: #FAF0F0;;
+  background-color: #FAF0F0;
   border: .1rem #ADC0C9 solid;
   border-radius: .5rem;
   cursor: pointer; 
- 
+  width: 9rem;
+  height: 1rem;
 }
 .search-button:hover:hover{
   border: .1rem #ADC0C9 solid;
   background-color: #EFCB87;
 }
+
+/* Favorite icon-button */
 .icon-button {
   color: #FAF0F0;
   text-decoration: none; /* rid off the underline */
+  
 
 }
 .icon-button:hover{
   color:#EFCB87;
  }
 
-
-
-
-
-
-
-
-/* SearchBox and Calendar */
-.searchbox{
-display: "grid";
-flex-wrap: wrap;
-background: #143E52 0% 0% no-repeat padding-box;
-border-radius: 100px;
-opacity: 1;
-padding: 20px;
-margin-bottom: 20px;
-margin-top: 50px;
+.formControl {
+  background-color: #FAF0F0;
+  border-radius: .2rem;
+  cursor: pointer; 
+  margin-left: .5rem;
+  margin-right: .8rem;
 }
-.search-container {
-  display: "flex";
-  flexWrap: "wrap";
-}
+/* Calendar*/
 .textField {
-  marginLeft: theme.spacing(1);
-  marginRight: theme.spacing(1);
-  width: 200;
+  background-color: #FAF0F0;
+  border-radius: .2rem;
+  cursor: pointer; 
+  width: max-content;
 }
-.margin {
-  margin: theme.spacing(1);
+
+.selectControl {
+  background-color: #FAF0F0;
+  border-radius: .2rem;
+  cursor: pointer; 
 }
+

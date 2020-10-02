@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 
 function FavoritesScreen(props) {
  
 
-  return <div>hdhd</div>
+  return <div>FAVORITE SCREEN</div>
     
 }
 
