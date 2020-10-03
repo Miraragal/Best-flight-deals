@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import {userSearchReducer} from './reducers-Redux/searchReducers'
+import {userSearchReducer} from './redux/reducers-Redux/searchReducers'
 
 
 const initialState={}

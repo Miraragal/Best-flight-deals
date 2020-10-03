@@ -19,15 +19,17 @@ import {
   OutlinedInput,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { getToken, showToken } from "../data/auth";
 
 
 function SearchScreen(props) {
   //1-setting props in our state
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  //const token...
   const [departDate, setDepartDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
-  const [passenger, setPassenger] = useState(0);
+  const [passenger, setPassenger] = useState(1);
 
   //6-We map the new state with the new props = mapStateToPros
   const userSearch = useSelector((state) => state.userSearch);
@@ -36,10 +38,11 @@ function SearchScreen(props) {
   //7-We dispatch the props =mapDispatchToProps
   const dispatch = useDispatch();
 
-  //7-We call dispatch
+  //7- We call componentDiMount
   useEffect(() => {
     if (userInputs) {
       console.log(userInputs);
+      //getToken() set state token 
     }
     return () => {
       //
@@ -47,10 +50,10 @@ function SearchScreen(props) {
   }, [userInputs]);
 
   const searchHandler = async (input) => {
-    console.log("Your search is about to start;3,2,1..");
-    console.log(from + " " + to +"/" + departDate + "/" + returnDate+ "/ Passengers:" + passenger);
-    input.preventDefault();
+    console.log("Searching: "+ from + " " + to +"/" + departDate + "/" + returnDate+ "/ Passengers:" + passenger);
+    //incluir token variable 
     
+    input.preventDefault();
     // In this case, a preventDefault is called on the event when submitting the form to prevent a browser reload/refresh
     dispatch(search(from, to, departDate, returnDate, passenger));
     //2-post action search to redux-actions
