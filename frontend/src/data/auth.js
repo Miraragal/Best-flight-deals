@@ -12,7 +12,7 @@ export async function getToken() {
       client_secret: clientSecret,
     }),
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/x-www-form-urlencoded"
     },
   });
 

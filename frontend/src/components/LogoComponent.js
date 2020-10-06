@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Logo =()=>{
 
     return <div >
-        <Link to='/'>
+        <Link to='/home'>
     <FontAwesomeIcon icon={faPlane} />
     <FontAwesomeIcon icon={faCircle} />
     <FontAwesomeIcon icon={faCircle}  />
