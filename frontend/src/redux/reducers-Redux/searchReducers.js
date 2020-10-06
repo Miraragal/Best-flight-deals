@@ -10,10 +10,5 @@ const userSearchReducer = (state={}, action)=>{
     }
 }
 
-// function userUpdateSearchReducer= (state={}, action){
-//     switch(action.type){
-        
-//     }
-// }
 
 export {userSearchReducer}
