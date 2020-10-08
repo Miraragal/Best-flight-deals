@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch,useSelector} from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import IconButton from "@material-ui/core/IconButton";
 import {
+  faArrowAltCircleRight,
+  faArrowRight,
   faHeartbeat,
   faPlaneArrival,
   faPlaneDeparture,
   faSearch,
+  faThumbtack,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { search } from "../redux/actions-redux/searchActions";
 import {
   Button,
   FormControl,
   InputAdornment,
   MenuItem,
   OutlinedInput,
+  Card,
+  CardContent, Accordion, AccordionSummary, AccordionDetails, Typography, InputLabel,
 } from "@material-ui/core";
-import { Link, Redirect } from "react-router-dom";
-import { getToken} from "../data/auth";
-
-
+import { Link } from "react-router-dom";
+import { getToken } from "../data/auth";
+import axios from "axios";
+import { airportsInfo } from "../data/airports";
+import { urlGetFlights } from "../data/config";
 
 function SearchScreen(props) {
   //1-setting props in our state
@@ -31,40 +35,146 @@ function SearchScreen(props) {
   const [departDate, setDepartDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
   const [passenger, setPassenger] = useState(1);
-  
-   // //6-We map the new state with the new props = mapStateToPros
-   const userSearch = useSelector(state=> state.userSearch);
-   const userInputs= userSearch;
+  const [flights, setFlights] = useState([]);
+  const [connections, setConnections]=useState([]);
+  //const [flightsSplit,setFlightsSplit]= useState([])
+  const moreFlights = []
 
-  //7-We dispatch the props =mapDispatchToProps
-  const dispatch = useDispatch();
-
-  //7- We call componentDiMount
-  useEffect(() => {
-  //To unwrap the promise. We define an async function that will be called when declared searchHandler
-    async function myToken(){
-      try {
-        setToken(await getToken())
-        //Await for the getToken() to complete and declare the result in the vble token
-      } catch (err) {
-        console.log("Error: " + err);
-      }
-    }    
+  //We call componentDiMount
+  useEffect(() => {    
+    console.log("update")
     myToken();
-  }, [])
-
+    findConnections();
+  }, [flights]);
+  
+  //To unwrap the promise. We define an async function that will be called when declared searchHandler
+  const myToken = async () =>{
+    try {
+      setToken(await getToken());
+      //Await for the getToken() to complete and declare the result in the vble token
+    } catch (err) {
+      console.log("Error: " + err);
+    }
+  }
 
   const searchHandler = async (input) => {
     input.preventDefault();
-    // In this case, a preventDefault is called on the event when submitting the form to prevent a browser reload/refresh
-   
-    props.history.push('/flights', {from, to, departDate, returnDate, passenger, token})
-    //redirect to flights screen
+    console.log(
+      "Searching: " +
+        from +
+        " " +
+        to +
+        "/" +
+        departDate +
+        "/" +
+        returnDate +
+        "/ Passengers:" +
+        passenger +
+        "/ Token:" +
+        token
+    );
 
-    console.log("Searching: " +from +" " +to +"/" +departDate + "/" +returnDate +"/ Passengers:" +passenger + "/ Token:"+token)
-  };
+    let originCode = [];
+    console.log(originCode);
+    airportsInfo.filter((e) =>
+      e.LOCATION.toLowerCase().includes(from.toLowerCase()) ||
+      e.AIRPORT_NAME.toLowerCase().includes(from.toLowerCase())
+        ? originCode.push(e)
+        : "Not found"
+    );
 
-  
+    let destinationCode = [];
+    console.log(destinationCode);
+    airportsInfo.filter((e) =>
+      e.LOCATION.toLowerCase().includes(to.toLowerCase()) ||
+      e.AIRPORT_NAME.toLowerCase().includes(to.toLowerCase())
+        ? destinationCode.push(e)
+        : "Not found"
+    );
+
+    const Flightdata = {
+      originLocationCode: originCode[0].IATACODE, //string
+      destinationLocationCode: destinationCode[1].IATACODE, //string
+      departureDate: departDate, //ISO 8601 YYYY-MM-DD
+      returnDate: returnDate, //idem
+      adults: passenger, // integer
+      nonStop: false, //boolean
+      max: 250, //integer (max number of flights offerts to return-default paramater)
+    };
+
+    const urlParams = Object.keys(Flightdata)
+      .map(function (key) {
+        return key + "=" + Flightdata[key];
+      })
+      .join("&");
+
+    //Token to be sent to the GEST request:
+    axios({
+      methos: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      url: urlGetFlights + "?" + urlParams,
+    })
+      .then((response) => {
+        setFlights(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const findConnections= ()=>{
+    let stops= new Set()
+    flights.map(flight =>
+      (flight.itineraries[0].segments.length ===2) ? 
+       stops.add(flight.itineraries[0].segments[0].arrival.iataCode) : "No connections flight"
+      )
+
+      setConnections([...stops])
+      console.log([...stops])
+  }
+
+  const connectionSearch = async()=> {
+    connections.map(function (flight){ 
+    
+      let originCode = [];
+       airportsInfo.filter((e) =>
+      e.LOCATION.toLowerCase().includes(from.toLowerCase()) ||
+      e.AIRPORT_NAME.toLowerCase().includes(from.toLowerCase())
+        ? originCode.push(e)
+        : "Not found"
+    );
+      const connectionData = {
+        originLocationCode: originCode[0].IATACODE, //string
+        destinationLocationCode: flight, //string
+        departureDate: departDate, //ISO 8601 YYYY-MM-DD
+        returnDate: returnDate, //idem
+        adults: passenger, // integer
+        nonStop: true, //boolean
+        max: 250, //integer (max number of flights offerts to return-default paramater)
+      };
+      const urlParams = Object.keys(connectionData).map(function (key) {return key + "=" + connectionData[key];}).join("&");
+    
+      axios({
+        methos: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        url: urlGetFlights + "?" + urlParams,
+      })
+      .then((response) => {
+        moreFlights.push(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    })
+    console.log(moreFlights)
+  }
+
 
   return (
     <div className="searchbox">
@@ -88,7 +198,6 @@ function SearchScreen(props) {
                 }
               />
             </FormControl>{" "}
-      
             <TextField
               id="date"
               label="Depart"
@@ -153,24 +262,71 @@ function SearchScreen(props) {
 
           <li>
             <Button type="search" variant="contained" className="search-button">
-              <FontAwesomeIcon icon={faSearch} />Search
+              <FontAwesomeIcon icon={faSearch} />
+              Search 
             </Button>
-        
           </li>
           {""}
           <li>
             <Link to="/favorites">
               <IconButton>
-                <FontAwesomeIcon icon={faHeartbeat} className="icon-button" />
+                <FontAwesomeIcon  icon={faHeartbeat} className="icon-button" />
               </IconButton>
             </Link>
           </li>
         </ul>
       </form>
+      
+      <ul className="flights">
+        {flights.map((flight) => (
+          <li key={flight.id}>
+            <Card>
+              <CardContent>
+                <Button className="price-button" variant="contained" >Total cost: {flight.price.total}{flight.price.currency}</Button>
+                <IconButton onClick={connectionSearch}>
+                  <FontAwesomeIcon icon={faThumbtack} className="icon-button" />
+                </IconButton>
+                <hr />
+                <div className="itineraries">
+                  {flight.itineraries.map((itinerary,index) => (     
+                    <li key={itinerary.id}>
+                      <div className="trip">
+                     <InputLabel>{index===0? "Outbound":"Return"}</InputLabel> Duration:{itinerary.duration.slice(2,itinerary.duration.length)}  /  Stops: {itinerary.segments.length}
+                      </div>
+                      <Accordion>
+                        <AccordionSummary>
+                          <Typography>
+                      <div className="trip-details">{itinerary.segments.map(segment=>
+                      <li key={segment.id}>
+                        <div className="departure-arrival"> {segment.departure.iataCode}  <FontAwesomeIcon icon={faArrowAltCircleRight}/>  {segment.arrival.iataCode}    / {segment.duration.slice(2,segment.duration.length)}</div>
+                        <div className="departure-arrival"> {segment.departure.at}  <FontAwesomeIcon icon={faArrowRight}/>  {segment.arrival.at}</div>
+                      </li>
+                        )}</div>
+                          </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <Typography> 
+                          <div className="x">{itinerary.segments.map(segment=>
+                      <li key={segment.id}>
+                        <div className="itinerary-details"> Airport: {segment.departure.iataCode}   Terminal: {segment.departure.terminal}   Time: {segment.departure.at} </div>
+                        <hr/>
+                        <div className="itinerary-details"> Airport: {segment.arrival.iataCode}   Terminal: {segment.arrival.terminal}   Time: {segment.arrival.at}</div>   
+                      </li>
+                        )}</div>
+                          </Typography>
+                        </AccordionDetails>
+                      </Accordion>
+                      <br />
+                    </li>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 export default SearchScreen;
-
-

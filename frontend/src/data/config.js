@@ -5,3 +5,6 @@ const url='https://test.api.amadeus.com/v1/security/oauth2/token'
 const urlGetFlights= 'https://test.api.amadeus.com/v2/shopping/flight-offers'
 
 export {clientId, clientSecret, url, urlGetFlights}
+
+
+
