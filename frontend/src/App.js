@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
 import {BrowserRouter, Route} from 'react-router-dom';
-import Logo from './components/LogoComponent';
-import SearchScreen from './components/HomeScreen';
+import Logo from './components/Logo';
+import SearchScreen from './components/SearchBox';
 import FavoritesScreen from './components/FavoritesScreen';
-import FlightsScreen from './components/FlightsScreen';
+
 
 function App() {
   return (
@@ -18,7 +18,6 @@ function App() {
       <main className='main'>  
         <div className='content'>
       <Route path="/home"  component={SearchScreen} /> 
-      <Route path="/flights" component={FlightsScreen} /> 
       <Route path="/favorites"  component={FavoritesScreen} /> 
         </div>
       </main>

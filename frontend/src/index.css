@@ -1,6 +1,5 @@
 html, body {
-  background: #ADC0C9 0% 0% no-repeat padding-box;
-  background-image: url("/images/Diseño sin título (2).png");
+  background: #143E52 20% 50% no-repeat padding-box; 
   opacity: 1;
   height: 100% ; /*Viewport height*/
   margin: 0;
@@ -42,7 +41,8 @@ li{
 .searchbox{
   display: "grid";
   flex-wrap: wrap;
-  background: #143E52;
+  background-image: url("/images/Diseño sin título (2).png");
+  /* background: #143E52; */
   border-radius: 20px;
   opacity: 1;
   padding: 45px;
@@ -69,7 +69,9 @@ li{
 }
 .search-button:hover:hover{
   border: .1rem #ADC0C9 solid;
-  background-color: #EFCB87;
+  background-color: 
+  
+  ;
 }
 
 /* Favorite icon-button */
