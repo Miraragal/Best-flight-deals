@@ -18,6 +18,7 @@ import { Connections } from "./ConnectionsFlights";
 
 export const RenderFlights = ({
   flights,
+  connections,
   from,
   to,
   departDate,
@@ -74,14 +75,15 @@ export const RenderFlights = ({
       const sortProperty = sortTypes[e];
       const sorted = flights.sort(sortProperty);
       setData(sorted);
-      console.log(sorted);
+    
     };
     sortArray(currentSort);
-  }, [currentSort]);
+  }, [flights,currentSort]);
+
 
   return (
     <div>
-      <div className="render-fligths">
+      <div className="sort-fligths">
         Sort by{" "}
         <select onChange={(e) => setCurrentSort(e.target.value)}>
           <option value="default"></option>
@@ -104,7 +106,8 @@ export const RenderFlights = ({
                     {flight.price.currency}
                   </Button>
                   <Connections
-                    flights={flights}
+                    flight={flight}
+                    connections={connections}
                     from={from}
                     to={to}
                     departDate={departDate}

@@ -1,32 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import axios from "axios";
 import { urlGetFlights } from "../data/config";
 import { airportsInfo } from "../data/airports";
 import IconButton from "@material-ui/core/IconButton";
 import {faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {ConnectionRender} from './ConnectionDisplay'
 
-export const Connections =({flights, from, to, departDate, returnDate, passenger, token})=>{
-    const [connections, setConnections] = useState([]);
+
+export const Connections =({ flight, connections, from, to, departDate, returnDate, passenger, token})=>{
+
     let moreFlights1 = [];
     let moreFlights2 = [];
     
 
     useEffect(() => {
-        console.log("Connections Found");
-        const findConnections = () => {
-          let stops = new Set();
-          flights.map((flight) =>
-            flight.itineraries[0].segments.length === 2
-              ? stops.add(flight.itineraries[0].segments[0].arrival.iataCode)
-              : "No connections flight"
-          );
-          setConnections([...stops]);
-          console.log([...stops]);
-        };
-      }, [flights]);
+      console.log(`Connections Found:${connections}`);
+      }, [connections]);
 
-  
     
     const connectionSearch = async (iataCode) => {
         moreFlights1 = [];
@@ -113,15 +104,19 @@ export const Connections =({flights, from, to, departDate, returnDate, passenger
         }, millisecondsToWait);
       };
 
+      
       return (
-          <div>
-                <IconButton
-                  onClick={() =>connectionSearch(flights.itineraries[0].segments[0].arrival.iataCode)
+          <div className="connections-select">
+                <IconButton 
+                  onClick={() => console.log(flight.itineraries.map(x=> x.segments[0].arrival.iataCode))
                   }
-                >
+                  >
                   <FontAwesomeIcon icon={faThumbtack} className="icon-button" />
                 </IconButton>
+                <ConnectionRender outboundConex={moreFlights1} returnConex={moreFlights2}/>
           </div>
+
       )
 
 }
+

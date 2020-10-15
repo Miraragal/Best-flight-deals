@@ -23,6 +23,7 @@ import { airportsInfo } from "../data/airports";
 import { urlGetFlights } from "../data/config";
 import {RenderFlights} from './FlightsDisplay'
 
+
 function SearchBox() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -31,10 +32,12 @@ function SearchBox() {
   const [returnDate, setReturnDate] = useState(new Date());
   const [passenger, setPassenger] = useState(1);
   const [flights, setFlights] = useState([]);
+  const [connections, setConnections] = useState([]);
 
   //We call componentDiMount
   useEffect(() => {
     myToken();
+    findConnections();
   }, [flights]);
 
   //To unwrap the promise. We define an async function that will be called when declared searchHandler
@@ -47,6 +50,7 @@ function SearchBox() {
     }
   };
 
+  //Search Selection
   const searchHandler = async (input) => {
     input.preventDefault();
     console.log(
@@ -115,6 +119,18 @@ function SearchBox() {
       });
   };
 
+  //Connections for Search Selection
+  const findConnections = () => {
+    let stops = new Set();
+    flights.map((flight) =>
+    flight.itineraries[0].segments.length === 2
+    ? stops.add(flight.itineraries[0].segments[0].arrival.iataCode)
+    : "No connections flight"
+    );
+    setConnections([...stops]); 
+  };
+
+  
   return (
     <div>
       <div className="searchbox">
@@ -139,7 +155,7 @@ function SearchBox() {
                 />
               </FormControl>{" "}
               <TextField
-                id="date"
+                id="goDate"
                 label="Depart"
                 type="date"
                 defaultValue=""
@@ -170,7 +186,7 @@ function SearchBox() {
                 />
               </FormControl>{" "}
               <TextField
-                id="date"
+                id="backDate"
                 label="Return"
                 type="date"
                 defaultValue=""
@@ -223,6 +239,7 @@ function SearchBox() {
       </div>
       <RenderFlights  
         flights={flights}
+        connections={connections}
         from={from}
         to={to}
         departDate={departDate}
