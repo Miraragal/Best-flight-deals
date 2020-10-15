@@ -21,11 +21,9 @@ import { getToken } from "../data/auth";
 import axios from "axios";
 import { airportsInfo } from "../data/airports";
 import { urlGetFlights } from "../data/config";
-import { SortFlights } from "./Flights";
-import {Connections} from './ConnectionsFlights'
+import {RenderFlights} from './FlightsDisplay'
 
-function SearchScreen() {
-  //1-setting props in our state
+function SearchBox() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [token, setToken] = useState("");
@@ -223,10 +221,7 @@ function SearchScreen() {
           </ul>
         </form>
       </div>
-
-      <SortFlights
-        flights={flights}/>
-      <Connections 
+      <RenderFlights  
         flights={flights}
         from={from}
         to={to}
@@ -238,4 +233,4 @@ function SearchScreen() {
   );
 }
 
-export default SearchScreen;
+export default SearchBox;

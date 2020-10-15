@@ -13,20 +13,20 @@ export const Connections =({flights, from, to, departDate, returnDate, passenger
     
 
     useEffect(() => {
-        console.log("conectando");
-        findConnections();
-      }, []);
+        console.log("Connections Found");
+        const findConnections = () => {
+          let stops = new Set();
+          flights.map((flight) =>
+            flight.itineraries[0].segments.length === 2
+              ? stops.add(flight.itineraries[0].segments[0].arrival.iataCode)
+              : "No connections flight"
+          );
+          setConnections([...stops]);
+          console.log([...stops]);
+        };
+      }, [flights]);
 
-    const findConnections = () => {
-        let stops = new Set();
-        flights.map((flight) =>
-          flight.itineraries[0].segments.length === 2
-            ? stops.add(flight.itineraries[0].segments[0].arrival.iataCode)
-            : "No connections flight"
-        );
-        setConnections([...stops]);
-        console.log([...stops]);
-      };
+  
     
     const connectionSearch = async (iataCode) => {
         moreFlights1 = [];
@@ -116,9 +116,7 @@ export const Connections =({flights, from, to, departDate, returnDate, passenger
       return (
           <div>
                 <IconButton
-                  onClick={() =>connectionSearch(
-                      flights.itineraries[0].segments[0].arrival.iataCode
-                    )
+                  onClick={() =>connectionSearch(flights.itineraries[0].segments[0].arrival.iataCode)
                   }
                 >
                   <FontAwesomeIcon icon={faThumbtack} className="icon-button" />
