@@ -1,10 +1,11 @@
 import React from "react";
 
 
-export const ConnectionRender =({outboundConex, returnConex})=>{
+export const ConnectionRender=(props) => {
+ 
 
-      return (<div>
-          {returnConex}
-      </div>)
+  return <div></div>
+    
 }
+
 

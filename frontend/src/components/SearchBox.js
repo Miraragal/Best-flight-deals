@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
-import Select from "@material-ui/core/Select";
-import IconButton from "@material-ui/core/IconButton";
 import {
   faHeartbeat,
   faPlaneArrival,
@@ -12,9 +9,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   FormControl,
+  FormControlLabel,
   InputAdornment,
   MenuItem,
   OutlinedInput,
+  RadioGroup,
+  Select,
+  IconButton,
+  Radio,
+  TextField,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { getToken } from "../data/auth";
@@ -27,6 +30,7 @@ import {RenderFlights} from './FlightsDisplay'
 function SearchBox() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const[ returnInput,setReturnInput]=useState(false)
   const [token, setToken] = useState("");
   const [departDate, setDepartDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
@@ -49,6 +53,12 @@ function SearchBox() {
       console.log("Error: " + err);
     }
   };
+
+  //InputBox Handler
+  const inputHandler=()=>{
+    setReturnInput(!returnInput)
+
+  }
 
   //Search Selection
   const searchHandler = async (input) => {
@@ -131,12 +141,21 @@ function SearchBox() {
   };
 
   
+
+  
   return (
     <div>
       <div className="searchbox">
         <form onSubmit={searchHandler}>
           <ul className="form-container">
             <li>
+              <FormControl>
+                <RadioGroup defaultValue="return">
+                  <FormControlLabel value="one-way" control={<Radio color="white" />} label="One-way"  onClick={inputHandler}/> 
+                  <FormControlLabel value="return"  control={<Radio color="white" />} label="Return" onClick={inputHandler}/>
+                </RadioGroup>
+
+              </FormControl >
               <label htmlFor="from">
                 <h3>From:</h3>
               </label>
@@ -175,6 +194,7 @@ function SearchBox() {
                 <OutlinedInput
                   id="return"
                   value={to}
+                  disabled={returnInput}
                   placeholder="Enter city or airport"
                   onChange={(input) => setTo(input.target.value)}
                   startAdornment={
@@ -189,6 +209,7 @@ function SearchBox() {
                 id="backDate"
                 label="Return"
                 type="date"
+                disabled={setReturnInput}
                 defaultValue=""
                 className="textField"
                 InputLabelProps={{

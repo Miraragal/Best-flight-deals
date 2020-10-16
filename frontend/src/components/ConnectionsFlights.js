@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, {useEffect,useState } from "react";
 import axios from "axios";
 import { urlGetFlights } from "../data/config";
 import { airportsInfo } from "../data/airports";
@@ -9,7 +9,6 @@ import {ConnectionRender} from './ConnectionDisplay'
 
 
 export const Connections =({ flight, connections, from, to, departDate, returnDate, passenger, token})=>{
-
     let moreFlights1 = [];
     let moreFlights2 = [];
     
@@ -108,11 +107,13 @@ export const Connections =({ flight, connections, from, to, departDate, returnDa
       return (
           <div className="connections-select">
                 <IconButton 
-                  onClick={() => console.log(flight.itineraries.map(x=> x.segments[0].arrival.iataCode))
+                  onClick={() => 
+                    connectionSearch(flight.itineraries.map(x=> x.segments[0].arrival.iataCode).reduce((a,b)=>a.includes(b)?  a : [a,b]))
                   }
                   >
                   <FontAwesomeIcon icon={faThumbtack} className="icon-button" />
-                </IconButton>
+                </IconButton> 
+             
                 <ConnectionRender outboundConex={moreFlights1} returnConex={moreFlights2}/>
           </div>
 

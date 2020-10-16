@@ -75,26 +75,29 @@ export const RenderFlights = ({
       const sortProperty = sortTypes[e];
       const sorted = flights.sort(sortProperty);
       setData(sorted);
-    
     };
     sortArray(currentSort);
-  }, [flights,currentSort]);
+  }, [currentSort]);
 
+  const showIconPin = (value) => value > 1;
 
   return (
     <div>
-      <div className="sort-fligths">
+        {!(flights.length===0) ?  
+        <div className="sort-fligths">
         Sort by{" "}
         <select onChange={(e) => setCurrentSort(e.target.value)}>
-          <option value="default"></option>
-          <option value="cheapest">Cheapest first</option>
-          <option value="fastest">Fastest firts</option>
+          <option value="default">Default</option>
+          <option value="cheapest">Cheapest</option>
+          <option value="fastest">Fastest</option>
           <option value="outboundStops"> Outbound: Stops</option>
           <option value="returnStops"> Return: Stops</option>
           <option value="outboundDepartureT"> Outbound: Departure time</option>
           <option value="returnDepartureT"> Return: Departure time</option>
         </select>
-      </div>
+        </div>
+        : null }
+       
       <div className="render-flights">
         <ul>
           {flights.map((flight) => (
@@ -105,16 +108,20 @@ export const RenderFlights = ({
                     Total cost: {flight.price.total}
                     {flight.price.currency}
                   </Button>
-                  <Connections
-                    flight={flight}
-                    connections={connections}
-                    from={from}
-                    to={to}
-                    departDate={departDate}
-                    returnDate={returnDate}
-                    passenger={passenger}
-                    token={token}
-                  />
+                  {flight.itineraries
+                    .map((e) => e.segments.length)
+                    .every(showIconPin) ? (
+                    <Connections
+                      flight={flight}
+                      connections={connections}
+                      from={from}
+                      to={to}
+                      departDate={departDate}
+                      returnDate={returnDate}
+                      passenger={passenger}
+                      token={token}
+                    />
+                  ) : null}
                   <hr />
                   <div className="itineraries">
                     {flight.itineraries.map((itinerary, index) => (
