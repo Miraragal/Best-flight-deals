@@ -31,7 +31,7 @@ export const RenderFlights = ({
 
   useEffect(() => {
     console.log(`Sort by:${currentSort}`);
-
+    
     const sortArray = (e) => {
       const sortTypes = {
         cheapest: (a, b) => a.price.total - b.price.total,
@@ -83,8 +83,9 @@ export const RenderFlights = ({
 
   return (
     <div>
+      <div className="sort-fligths">
         {!(flights.length===0) ?  
-        <div className="sort-fligths">
+        <div>
         Sort by{" "}
         <select onChange={(e) => setCurrentSort(e.target.value)}>
           <option value="default">Default</option>
@@ -94,10 +95,10 @@ export const RenderFlights = ({
           <option value="returnStops"> Return: Stops</option>
           <option value="outboundDepartureT"> Outbound: Departure time</option>
           <option value="returnDepartureT"> Return: Departure time</option>
-        </select>
+        </select> 
         </div>
         : null }
-       
+        </div>
       <div className="render-flights">
         <ul>
           {flights.map((flight) => (

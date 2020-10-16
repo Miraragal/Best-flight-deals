@@ -5,22 +5,25 @@ import { airportsInfo } from "../data/airports";
 import IconButton from "@material-ui/core/IconButton";
 import {faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {ConnectionRender} from './ConnectionDisplay'
+import {RenderConnections } from './ConnectionDisplay'
 
 
 export const Connections =({ flight, connections, from, to, departDate, returnDate, passenger, token})=>{
-    let moreFlights1 = [];
-    let moreFlights2 = [];
-    
+  const[trip1, setTrip1]=useState()
+  const[trip2, setTrip2]=useState()    
 
     useEffect(() => {
-      console.log(`Connections Found:${connections}`);
+      if (connections.length >0) {
+        console.log(`Connections Found:${connections}`);
+      }
+      return () => {
+        //
+      };
       }, [connections]);
 
     
+    //Searching for independents flights connections 
     const connectionSearch = async (iataCode) => {
-        moreFlights1 = [];
-        moreFlights2 = [];
     
         let originCode = [];
         airportsInfo.filter((e) =>
@@ -76,14 +79,14 @@ export const Connections =({ flight, connections, from, to, departDate, returnDa
           url: urlGetFlights + "?" + urlParams1,
         })
           .then((response) => {
-            moreFlights1.push(response.data.data);
-            console.log(moreFlights1);
+            setTrip1(response.data.data)
+            
           })
           .catch((error) => {
             console.log(error);
           });
     
-        var millisecondsToWait = 100;
+        var millisecondsToWait = 120;
         setTimeout(function () {
           // Whatever you want to do after the wait
           axios({
@@ -94,17 +97,16 @@ export const Connections =({ flight, connections, from, to, departDate, returnDa
             url: urlGetFlights + "?" + urlParams2,
           })
             .then((response) => {
-              moreFlights2.push(response.data.data);
-              console.log(moreFlights2);
+              setTrip2(response.data.data)
             })
             .catch((error) => {
               console.log(error);
             });
         }, millisecondsToWait);
       };
-
       
       return (
+        <div>
           <div className="connections-select">
                 <IconButton 
                   onClick={() => 
@@ -113,11 +115,12 @@ export const Connections =({ flight, connections, from, to, departDate, returnDa
                   >
                   <FontAwesomeIcon icon={faThumbtack} className="icon-button" />
                 </IconButton> 
-             
-                <ConnectionRender outboundConex={moreFlights1} returnConex={moreFlights2}/>
           </div>
-
-      )
-
+          <RenderConnections  trip1={trip1} trip2={trip2}/> 
+      </div>
+  )
 }
+
+
+
 

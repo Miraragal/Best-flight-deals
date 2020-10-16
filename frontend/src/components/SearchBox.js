@@ -25,9 +25,11 @@ import axios from "axios";
 import { airportsInfo } from "../data/airports";
 import { urlGetFlights } from "../data/config";
 import {RenderFlights} from './FlightsDisplay'
+//import {RenderConnections } from './ConnectionsFlights'
 
 
 function SearchBox() {
+ 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const[ returnInput,setReturnInput]=useState(false)
@@ -141,8 +143,6 @@ function SearchBox() {
   };
 
   
-
-  
   return (
     <div>
       <div className="searchbox">
@@ -151,8 +151,8 @@ function SearchBox() {
             <li>
               <FormControl>
                 <RadioGroup defaultValue="return">
-                  <FormControlLabel value="one-way" control={<Radio color="white" />} label="One-way"  onClick={inputHandler}/> 
-                  <FormControlLabel value="return"  control={<Radio color="white" />} label="Return" onClick={inputHandler}/>
+                  <FormControlLabel value="one-way" control={<Radio color="default" />} label="One-way"  onClick={inputHandler}/> 
+                  <FormControlLabel value="return"  control={<Radio color="default" />} label="Return" onClick={inputHandler}/>
                 </RadioGroup>
 
               </FormControl >
@@ -209,7 +209,7 @@ function SearchBox() {
                 id="backDate"
                 label="Return"
                 type="date"
-                disabled={setReturnInput}
+                disabled={returnInput}
                 defaultValue=""
                 className="textField"
                 InputLabelProps={{
@@ -267,6 +267,7 @@ function SearchBox() {
         returnDate={returnDate}
         passenger={passenger}
         token={token} />
+      {/* <RenderConnections /> */}
     </div>
   );
 }
