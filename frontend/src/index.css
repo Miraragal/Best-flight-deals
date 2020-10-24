@@ -99,15 +99,43 @@ h2 {
   border: solid 1px #143e52; 
 }
 
+.heart-button{
+  left: 6.45%;
+  right: 6.45%;
+  top: 12.49%;
+  bottom: 11.54%;
+  color: #143e52;
+}
+.heart-button:hover{
+  color:#F2BF5D;
+}
+
+
+.icon-text{
+font-family: Futura;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 21px;
+text-align: right;
+color: #143E52;
+}
+
 .search-button{
   cursor: pointer; 
   width: 200px;
   height: 58px;
-  align-items: left;
+  font-family: Futura !important; 
   background-color: #143e52 !important;
   color: white !important; 
  
 }
+.search-button:hover{
+  color:#F2BF5D !important;
+}
+
+
+
 
 
 

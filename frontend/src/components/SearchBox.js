@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
+  faGrinHearts,
+  faHeart,
   faHeartbeat,
+  faHeartBroken,
   faPlaneArrival,
   faPlaneDeparture,
   faSearch,
@@ -248,55 +251,56 @@ function SearchBox() {
             <Grid
                 container
                 direction="row"
-                justify="flex-end"
+                
                 alignItems="center"
-                className="labels"
-             
+                spacing={1}
+                style={{margin:10}}
             >
            
-
-              <Grid container xs={4}  spacing={1}>
-                  <RadioGroup row defaultValue="return">
+              <Grid container xs={4} spacing={1}>
+                <Grid item>
+                  <RadioGroup row defaultValue="return"  >
                     <FormControlLabel
+                      className="radio-button"
                       value="one-way"
-                      control={<Radio color="default" />}
+                      control={<Radio style={{color: '#143E52'}} />}
                       label="One-way"
                       onClick={inputHandler}
                     />
                     <FormControlLabel
                       value="return"
-                      control={<Radio color="default" />}
-                      label="Return"
+                      control={<Radio style={{color: '#143E52'}} />}
+                      label="Roundtrip"
                       onClick={inputHandler}
                     />
-
-                   
                   </RadioGroup>
-              </Grid>
 
-              <Grid container xs={4} direction="column" spacing={1} >
-                <Grid item>
-                  <Link to="/favorites">
-                    <IconButton>
-                      <FontAwesomeIcon
-                        icon={faHeartbeat}
-                        className="icon-button"
-                      />
-                    </IconButton>
-                  </Link>
-                  favorites
                 </Grid>
               </Grid>
 
-              <Grid container xs={4} direction="column" spacing={1}>
-                <Grid item>
+              <Grid container xs={5}  spacing={1} justify="flex-end" >
+                <Grid item className="icon-text">
+                  <Link to="/favorites" >
+                    <IconButton>
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        className="heart-button"
+                      />
+                    </IconButton>
+                  </Link>
+                  Go to your flights
+                </Grid>
+              </Grid>
+
+              <Grid container xs={3} direction="column" spacing={1} alignItems="center">
+                <Grid item >
                   <Button
                     className="search-button"
                     type="search"
-                    variant="contained"                
+                    variant="contained"          
                   >
-                    <FontAwesomeIcon icon={faSearch} />
-                    Search
+                    <FontAwesomeIcon icon={faSearch} style={{marginRight:15}}/>
+                    Search Flights
                   </Button>
                 </Grid>
               </Grid>
