@@ -18,21 +18,21 @@ import {
   IconButton,
   Radio,
   TextField,
+  Grid,
+  Container,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { getToken } from "../data/auth";
 import axios from "axios";
 import { airportsInfo } from "../data/airports";
 import { urlGetFlights } from "../data/config";
-import {RenderFlights} from './FlightsDisplay'
+import { RenderFlights } from "./FlightsDisplay";
 //import {RenderConnections } from './ConnectionsFlights'
 
-
 function SearchBox() {
- 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const[ returnInput,setReturnInput]=useState(false)
+  const [returnInput, setReturnInput] = useState(false);
   const [token, setToken] = useState("");
   const [departDate, setDepartDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
@@ -57,10 +57,9 @@ function SearchBox() {
   };
 
   //InputBox Handler
-  const inputHandler=()=>{
-    setReturnInput(!returnInput)
-
-  }
+  const inputHandler = () => {
+    setReturnInput(!returnInput);
+  };
 
   //Search Selection
   const searchHandler = async (input) => {
@@ -135,130 +134,180 @@ function SearchBox() {
   const findConnections = () => {
     let stops = new Set();
     flights.map((flight) =>
-    flight.itineraries[0].segments.length === 2
-    ? stops.add(flight.itineraries[0].segments[0].arrival.iataCode)
-    : "No connections flight"
+      flight.itineraries[0].segments.length === 2
+        ? stops.add(flight.itineraries[0].segments[0].arrival.iataCode)
+        : "No connections flight"
     );
-    setConnections([...stops]); 
+    setConnections([...stops]);
   };
 
-  
   return (
     <div>
-      <div className="searchbox">
+      <Container>
         <form onSubmit={searchHandler}>
-          <ul className="form-container">
-            <li>
-              <FormControl>
-                <RadioGroup defaultValue="return">
-                  <FormControlLabel value="one-way" control={<Radio color="default" />} label="One-way"  onClick={inputHandler}/> 
-                  <FormControlLabel value="return"  control={<Radio color="default" />} label="Return" onClick={inputHandler}/>
-                </RadioGroup>
+          <Grid container className="whiteBox">
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+              className="labels"
+              spacing={1}
+              style={{margin:10}}
+              
+            >
+              <Grid container xs={2} direction="column" spacing={1}>
+                <Grid item>
+                  <label htmlFor="labels">From:</label>
+                </Grid>
+                <Grid item>
+                  <OutlinedInput
+                    className="inputBoxes"
+                    value={from}
+                    placeholder="Enter city or airport"
+                    onChange={(input) => setFrom(input.target.value)}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        {" "}
+                        <FontAwesomeIcon icon={faPlaneDeparture} />
+                      </InputAdornment>
+                    }
+                  />
+                </Grid>
+              </Grid>
 
-              </FormControl >
-              <label htmlFor="from">
-                <h3>From:</h3>
-              </label>
-              <FormControl variant="outlined" className="formControl">
-                <OutlinedInput
-                  id="departure"
-                  value={from}
-                  placeholder="Enter city or airport"
-                  onChange={(input) => setFrom(input.target.value)}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      {" "}
-                      <FontAwesomeIcon icon={faPlaneDeparture} />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>{" "}
-              <TextField
-                id="goDate"
-                label="Depart"
-                type="date"
-                defaultValue=""
-                className="textField"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={(input) => setDepartDate(input.target.value)}
-              />
-            </li>
+              <Grid container xs={2} direction="column" spacing={1}>
+                <Grid item>
+                  <label htmlFor="labels">To:</label>
+                </Grid>
+                <Grid item>
+                  <OutlinedInput
+                    className="inputBoxes"
+                    value={to}
+                    disabled={returnInput}
+                    placeholder="Enter city or airport"
+                    onChange={(input) => setTo(input.target.value)}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        {" "}
+                        <FontAwesomeIcon icon={faPlaneArrival} />
+                      </InputAdornment>
+                    }
+                  />
+                </Grid>
+              </Grid>
+              <Grid container xs={2} direction="column" spacing={1}>
+                <Grid item>
+                  <label htmlFor="labels">Depart:</label>
+                </Grid>
+                <Grid item>
+                  <OutlinedInput
+                    className="inputBoxes"
+                    type="date"
+                    defaultValue=""
+                    onChange={(input) => setDepartDate(input.target.value)}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container xs={2} direction="column" spacing={1}>
+                <Grid item>
+                  <label htmlFor="labels">Return:</label>
+                </Grid>
+                <Grid item>
+                  <OutlinedInput
+                    className="inputBoxes"
+                    type="date"
+                    disabled={returnInput}
+                    defaultValue=""
+                    onChange={(input) => setReturnDate(input.target.value)}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container xs={2} direction="column" spacing={1}>
+                <Grid item>
+                  <label htmlFor="labels">Passengers:</label>
+                </Grid>
+                <Grid item>
+                  <Select
+                    className="inputPassenger"
+                    variant="outlined"
+                    value={passenger}
+                    onChange={(input) => setPassenger(input.target.value)}
+                    >
+              
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                  </Select>
 
-            <li>
-              <label htmlFor="to">
-                <h3>To:</h3>
-              </label>
-              <FormControl variant="outlined" className="formControl">
-                <OutlinedInput
-                  id="return"
-                  value={to}
-                  disabled={returnInput}
-                  placeholder="Enter city or airport"
-                  onChange={(input) => setTo(input.target.value)}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      {" "}
-                      <FontAwesomeIcon icon={faPlaneArrival} />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>{" "}
-              <TextField
-                id="backDate"
-                label="Return"
-                type="date"
-                disabled={returnInput}
-                defaultValue=""
-                className="textField"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={(input) => setReturnDate(input.target.value)}
-              />
-            </li>
+                </Grid>
+              </Grid>
+            </Grid>
 
-            <li>
-              <label htmlFor="passenger">
-                <h5>Number of Passenger:</h5>
-              </label>
-              <Select
-                className="selectControl"
-                fullWidth
-                value={passenger}
-                onChange={(input) => setPassenger(input.target.value)}
-              >
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={4}>4</MenuItem>
-                <MenuItem value={5}>5</MenuItem>
-              </Select>
-            </li>
+            <Grid
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="center"
+                className="labels"
+             
+            >
+           
 
-            <li>
-              <Button
-                type="search"
-                variant="contained"
-                className="search-button"
-              >
-                <FontAwesomeIcon icon={faSearch} />
-                Search
-              </Button>
-            </li>
-            {""}
-            <li>
-              <Link to="/favorites">
-                <IconButton>
-                  <FontAwesomeIcon icon={faHeartbeat} className="icon-button" />
-                </IconButton>
-              </Link>
-            </li>
-          </ul>
+              <Grid container xs={4}  spacing={1}>
+                  <RadioGroup row defaultValue="return">
+                    <FormControlLabel
+                      value="one-way"
+                      control={<Radio color="default" />}
+                      label="One-way"
+                      onClick={inputHandler}
+                    />
+                    <FormControlLabel
+                      value="return"
+                      control={<Radio color="default" />}
+                      label="Return"
+                      onClick={inputHandler}
+                    />
+
+                   
+                  </RadioGroup>
+              </Grid>
+
+              <Grid container xs={4} direction="column" spacing={1} >
+                <Grid item>
+                  <Link to="/favorites">
+                    <IconButton>
+                      <FontAwesomeIcon
+                        icon={faHeartbeat}
+                        className="icon-button"
+                      />
+                    </IconButton>
+                  </Link>
+                  favorites
+                </Grid>
+              </Grid>
+
+              <Grid container xs={4} direction="column" spacing={1}>
+                <Grid item>
+                  <Button
+                    className="search-button"
+                    type="search"
+                    variant="contained"                
+                  >
+                    <FontAwesomeIcon icon={faSearch} />
+                    Search
+                  </Button>
+                </Grid>
+              </Grid>
+
+           
+            </Grid>
+          </Grid>
         </form>
-      </div>
-      <RenderFlights  
+      </Container>
+
+      <RenderFlights
         flights={flights}
         connections={connections}
         from={from}
@@ -266,10 +315,11 @@ function SearchBox() {
         departDate={departDate}
         returnDate={returnDate}
         passenger={passenger}
-        token={token} />
+        token={token}
+      />
       {/* <RenderConnections /> */}
     </div>
-  );
+  )
 }
 
 export default SearchBox;

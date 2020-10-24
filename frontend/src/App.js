@@ -11,13 +11,11 @@ function App() {
   <BrowserRouter>
     <div className="grid-container">
       <header className="header">
-        <div className="logo">
           <Logo />
-        </div>
       </header>
       <main className='main'>  
         <div className='content'>
-      <Route path="/home"  component={SearchBox} /> 
+      <Route path="/"  component={SearchBox} /> 
       <Route path="/favorites"  component={FavoritesScreen} /> 
         </div>
       </main>

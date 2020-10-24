@@ -1,108 +1,114 @@
-html, body {
-  background: #143E52 20% 50% no-repeat padding-box; 
-  opacity: 1;
-  height: 100% ; /*Viewport height*/
-  margin: 0;
-  text-align:left;
-  font: normal normal normal 25px/31px InaiMathi;
-  letter-spacing: 0px;
-  color: #FAF0F0;
+/* Background  */
+html {
+  /* position: absolute;
+  width: 1440px;
+  height: 860px;
+  left: 0px;
+  top: 0px; */
+  background-image: url("/images/background/kenrick-mills-MF9Wy1NA55I-unsplash 2.png");
 }
-
-#root{ /* Altura de la pantalla para las segundas pantallas, no la HomePage*/
-  height: 100%;
+/* //////////////////////////////////// */
+/* header title H1 & H2 */
+.headers{
+  padding: 134px 80px 104px 80px;
 }
-
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    "header"
-    "main";
-  height: 100%;
-  grid-template-columns: 1fr ;  /*solo una columna*/
-  grid-template-rows: 5rem 1fr 5rem; /* 3 lineas : header - main - footer*/
-  
+h1 {
+  /* width: 837px; */
+  height: 74px;
+  left: 78px;
+  top: 234px;
+  font-family: Futura;
+  font-size: 56px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #143e52;
+  /* position: absolute; */
+  color: #143e52;
 }
-.header {
-  grid-area: header;
-  display: flex;
-  border-style: none;
-  align-items: center;
-  padding: 1.5rem; 
+h2 {
+  /* position: absolute; */
+  width: 404px;
+  height: 43px;
+  left: 78px;
+  top: 336px;
+  font-family: Futura;
+  font-size: 32px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  /* identical to box height */
+  letter-spacing: normal;
+  text-align: left;
+  text-transform: uppercase;
+  color: #143e52;
 }
-
-
-li{
-  list-style-type: none;
-  margin: .2rem;
-}
-
-/* SearchContainer */
-.searchbox{
-  display: "grid";
-  flex-wrap: wrap;
-  background-image: url("/images/Diseño sin título (2).png");
-  /* background: #143E52; */
+/* //////////////////////////////////// */
+.whiteBox{
+  background: linear-gradient(0deg, #ffffff, #ffffff),
+  linear-gradient(
+    180deg,
+    #ffffff -22.98%,
+    #e9eef0 66.9%,
+    #d5dfe4 101.94%,
+    #adc0c9 159.79%
+  ); 
+  box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   border-radius: 20px;
-  opacity: 1;
-  padding: 45px;
-  margin-top: 150px;
+  /* justify-content: center; */
+  padding: 30px 30px 30px 30px;
+  width: 1280px;
+  height: 285px;
   
-  }
-/* Serchbox-content */
-.form-container{
-  display: inline-flex;
-  flex-wrap: wrap;
-  margin: .1rem;
-  padding: .1rem;
-  align-items: center;
+}
+
+.labels{
+  /* position: absolute;  */
+  /* width: 53px;
+  height: 21px;
+  left: 109px;
+  top: 533px; */
+  font-family: Futura;
+  font-style: normal; 
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: #143e52; 
+  text-align: left;
+  
+}
+
+/*Input-Box*/
+.inputBoxes {
+  min-width: 200px;
+  height: 58px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: solid 1px #143e52; 
+}
+.inputPassenger {
+  min-width: 168px;
+  height: 58px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: solid 1px #143e52; 
 }
 
 .search-button{
-  padding: 1rem;
-  background-color: #FAF0F0;
-  border: .1rem #ADC0C9 solid;
-  border-radius: .5rem;
   cursor: pointer; 
-  width: 9rem;
-  height: 1rem;
-}
-.search-button:hover:hover{
-  border: .1rem #ADC0C9 solid;
-  background-color: 
-  
-  ;
+  width: 200px;
+  height: 58px;
+  align-items: left;
+  background-color: #143e52 !important;
+  color: white !important; 
+ 
 }
 
-/* Favorite icon-button */
-.icon-button {
-  color: #FAF0F0;
-  text-decoration: none; /* rid off the underline */
-  
 
-}
-.icon-button:hover{
-  color:#EFCB87;
- }
 
-.formControl {
-  background-color: #FAF0F0;
-  border-radius: .2rem;
-  cursor: pointer; 
-  margin-left: .5rem;
-  margin-right: .8rem;
-}
-/* Calendar*/
-.textField {
-  background-color: #FAF0F0;
-  border-radius: .2rem;
-  cursor: pointer; 
-  width: max-content;
-}
-
-.selectControl {
-  background-color: #FAF0F0;
-  border-radius: .2rem;
-  cursor: pointer; 
-}
 
