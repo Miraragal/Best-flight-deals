@@ -250,16 +250,21 @@ function SearchBox() {
 
             <Grid
                 container
-                direction="row"
-                
+                direction="row"  
                 alignItems="center"
                 spacing={1}
-                style={{margin:10}}
+                
             >
            
-              <Grid container xs={4} spacing={1}>
+              <Grid container direction="row" xs={4} spacing={1} style={{marginLeft:10}}>
                 <Grid item>
                   <RadioGroup row defaultValue="return"  >
+                  <FormControlLabel
+                      value="return"
+                      control={<Radio style={{color: '#143E52'}} />}
+                      label="Roundtrip"
+                      onClick={inputHandler}
+                    />
                     <FormControlLabel
                       className="radio-button"
                       value="one-way"
@@ -267,19 +272,13 @@ function SearchBox() {
                       label="One-way"
                       onClick={inputHandler}
                     />
-                    <FormControlLabel
-                      value="return"
-                      control={<Radio style={{color: '#143E52'}} />}
-                      label="Roundtrip"
-                      onClick={inputHandler}
-                    />
                   </RadioGroup>
 
                 </Grid>
               </Grid>
 
-              <Grid container xs={5}  spacing={1} justify="flex-end" >
-                <Grid item className="icon-text">
+              <Grid container xs={8} direction="row" spacing={1} justify="flex-end">
+                <Grid item className="icon-text" style={{marginRight:10}} >
                   <Link to="/favorites" >
                     <IconButton>
                       <FontAwesomeIcon
@@ -290,10 +289,8 @@ function SearchBox() {
                   </Link>
                   Go to your flights
                 </Grid>
-              </Grid>
-
-              <Grid container xs={3} direction="column" spacing={1} alignItems="center">
-                <Grid item >
+      
+                <Grid item style={{marginRight:10}} >
                   <Button
                     className="search-button"
                     type="search"
