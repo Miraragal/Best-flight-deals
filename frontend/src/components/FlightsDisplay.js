@@ -3,10 +3,8 @@ import { faPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
-  Typography,
   InputLabel,
   Container,
-  Grid,
 } from "@material-ui/core";
 import { Connections } from "./ConnectionsFlights";
 
@@ -114,27 +112,27 @@ export const RenderFlights = ({
                             {index === 0 ? <h4>Outbound</h4> : <h4>Return</h4>}
                           </InputLabel>
                           <h5>
-                            Duration:&nbsp;
+                            Duration:
                             {itinerary.duration
                               .slice(2, itinerary.duration.length)
                               .replace("H", "h")
                               .replace("M", "")}
-                            &nbsp;&nbsp;Stops:{itinerary.segments.length}
+                            &nbsp;Stops:{itinerary.segments.length}
                           </h5>
                           <div className="trip-body">
                             {itinerary.segments.map((segment) => (
                               <li key={segment.id}>
                                 <div className="part1">
                                 {/* horas */}
-                                {segment.departure.at.slice(11, 16)}&nbsp;
-                                {segment.arrival.at.slice(11, 16)}
+                                {segment.departure.at.slice(11, 16)}h&nbsp;
+                                {segment.arrival.at.slice(11, 16)}h
                                 </div>
                                 {/* icon */}
                                 <div className="part2">
                                 <FontAwesomeIcon
                                   icon={faPlane}
                                   style={{ color: "#F2BF5D", justifyItems:'center'}}
-                                /><br/>
+                                />&nbsp;
                                 {/* duration */}
                                 {segment.duration
                                   .slice(2, segment.duration.length)
@@ -146,6 +144,7 @@ export const RenderFlights = ({
                                 {segment.departure.iataCode}&nbsp;
                                 {segment.arrival.iataCode}
                                 </div>
+                                <br/>
                               </li>
                             ))}
                           </div>
@@ -163,7 +162,7 @@ export const RenderFlights = ({
                           {flight.itineraries
                             .map((e) => e.segments.length)
                             .every(showIconPin) ? ( 
-                            <h5 className="icon-text">want more flights?
+                            <h6 className="icon-text">want more flights?
                             <Connections
                               flight={flight}
                               connections={connections}
@@ -173,7 +172,7 @@ export const RenderFlights = ({
                               returnDate={returnDate}
                               passenger={passenger}
                               token={token}
-                            /></h5>
+                            /></h6>
                           ) : null}
                       </div>
                   </div>
