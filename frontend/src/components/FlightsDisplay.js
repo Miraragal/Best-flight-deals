@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  faArrowAltCircleRight,
-  faArrowRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
-  Card,
-  CardContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
   Typography,
   InputLabel,
+  Container,
+  Grid,
 } from "@material-ui/core";
 import { Connections } from "./ConnectionsFlights";
 
@@ -31,7 +25,7 @@ export const RenderFlights = ({
 
   useEffect(() => {
     console.log(`Sort by:${currentSort}`);
-    
+
     const sortArray = (e) => {
       const sortTypes = {
         cheapest: (a, b) => a.price.total - b.price.total,
@@ -83,124 +77,112 @@ export const RenderFlights = ({
 
   return (
     <div>
-      <div className="sort-fligths">
-        {!(flights.length===0) ?  
-        <div>
-        Sort by{" "}
-        <select onChange={(e) => setCurrentSort(e.target.value)}>
-          <option value="default">Default</option>
-          <option value="cheapest">Cheapest</option>
-          <option value="fastest">Fastest</option>
-          <option value="outboundStops"> Outbound: Stops</option>
-          <option value="returnStops"> Return: Stops</option>
-          <option value="outboundDepartureT"> Outbound: Departure time</option>
-          <option value="returnDepartureT"> Return: Departure time</option>
-        </select> 
+      <Container style={{ backgroundColor: "#D3D3D3" }}>
+        <div className="sort-fligths">
+          {!(flights.length === 0) ? (
+            <div className="icon-text">
+              Sort by:{" "}
+              <select onChange={(e) => setCurrentSort(e.target.value)}>
+                <option value="default">Default</option>
+                <option value="cheapest">Cheapest</option>
+                <option value="fastest">Fastest</option>
+                <option value="outboundStops"> Outbound: Stops</option>
+                <option value="returnStops"> Return: Stops</option>
+                <option value="outboundDepartureT">
+                  {" "}
+                  Outbound: Departure time
+                </option>
+                <option value="returnDepartureT">
+                  {" "}
+                  Return: Departure time
+                </option>
+              </select>
+            </div>
+          ) : null}
         </div>
-        : null }
-        </div>
-      <div className="render-flights">
-        <ul>
-          {flights.map((flight) => (
-            <li key={flight.id}>
-              <Card>
-                <CardContent>
-                  <Button className="price-button" variant="contained">
-                    Total cost: {flight.price.total}
-                    {flight.price.currency}
-                  </Button>
-                  {flight.itineraries
-                    .map((e) => e.segments.length)
-                    .every(showIconPin) ? (
-                    <Connections
-                      flight={flight}
-                      connections={connections}
-                      from={from}
-                      to={to}
-                      departDate={departDate}
-                      returnDate={returnDate}
-                      passenger={passenger}
-                      token={token}
-                    />
-                  ) : null}
-                  <hr />
-                  <div className="itineraries">
+
+        <div className="render-flights">
+          <ul>
+            {flights.map((flight) => (
+              <li key={flight.id}>
+                <div className="card">
+                  <div className="container">
                     {flight.itineraries.map((itinerary, index) => (
-                      <li key={itinerary.id}>
-                        <div className="trip">
+                      <li>
+                        <div className="itineraries">
                           <InputLabel>
-                            {index === 0 ? "Outbound" : "Return"}
-                          </InputLabel>{" "}
-                          Duration:
-                          {itinerary.duration.slice(
-                            2,
-                            itinerary.duration.length
-                          )}{" "}
-                          / Stops: {itinerary.segments.length}
+                            {index === 0 ? <h4>Outbound</h4> : <h4>Return</h4>}
+                          </InputLabel>
+                          <h5>
+                            Duration:&nbsp;
+                            {itinerary.duration
+                              .slice(2, itinerary.duration.length)
+                              .replace("H", "h")
+                              .replace("M", "")}
+                            &nbsp;&nbsp;Stops:{itinerary.segments.length}
+                          </h5>
+                          <div className="trip-body">
+                            {itinerary.segments.map((segment) => (
+                              <li key={segment.id}>
+                                <div className="part1">
+                                {/* horas */}
+                                {segment.departure.at.slice(11, 16)}&nbsp;
+                                {segment.arrival.at.slice(11, 16)}
+                                </div>
+                                {/* icon */}
+                                <div className="part2">
+                                <FontAwesomeIcon
+                                  icon={faPlane}
+                                  style={{ color: "#F2BF5D", justifyItems:'center'}}
+                                /><br/>
+                                {/* duration */}
+                                {segment.duration
+                                  .slice(2, segment.duration.length)
+                                  .replace("H", "h")
+                                  .replace("M", "")}
+                                </div>
+                                <div className="part3">
+                                {/* airports */}
+                                {segment.departure.iataCode}&nbsp;
+                                {segment.arrival.iataCode}
+                                </div>
+                              </li>
+                            ))}
+                          </div>
                         </div>
-                        <Accordion>
-                          <AccordionSummary>
-                            <Typography>
-                              <div className="trip-details">
-                                {itinerary.segments.map((segment) => (
-                                  <li key={segment.id}>
-                                    <div className="departure-arrival">
-                                      {" "}
-                                      {segment.departure.iataCode}{" "}
-                                      <FontAwesomeIcon
-                                        icon={faArrowAltCircleRight}
-                                      />{" "}
-                                      {segment.arrival.iataCode} /{" "}
-                                      {segment.duration.slice(
-                                        2,
-                                        segment.duration.length
-                                      )}
-                                    </div>
-                                    <div className="departure-arrival">
-                                      {" "}
-                                      {segment.departure.at}{" "}
-                                      <FontAwesomeIcon icon={faArrowRight} />{" "}
-                                      {segment.arrival.at}
-                                    </div>
-                                  </li>
-                                ))}
-                              </div>
-                            </Typography>
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            <Typography>
-                              <div className="x">
-                                {itinerary.segments.map((segment) => (
-                                  <li key={segment.id}>
-                                    <div className="itinerary-details">
-                                      {" "}
-                                      Airport: {segment.departure.iataCode}{" "}
-                                      Terminal: {segment.departure.terminal}{" "}
-                                      Time: {segment.departure.at}{" "}
-                                    </div>
-                                    <hr />
-                                    <div className="itinerary-details">
-                                      {" "}
-                                      Airport: {segment.arrival.iataCode}{" "}
-                                      Terminal: {segment.arrival.terminal} Time:{" "}
-                                      {segment.arrival.at}
-                                    </div>
-                                  </li>
-                                ))}
-                              </div>
-                            </Typography>
-                          </AccordionDetails>
-                        </Accordion>
-                        <br />
+                      
                       </li>
                     ))}
+                      <div className="item">
+                        <h3>{flight.price.total}
+                            {flight.price.currency}</h3>
+                          <Button className="select-button" variant="contained">
+                           Select
+                          </Button>
+                          
+                          {flight.itineraries
+                            .map((e) => e.segments.length)
+                            .every(showIconPin) ? ( 
+                            <h5 className="icon-text">want more flights?
+                            <Connections
+                              flight={flight}
+                              connections={connections}
+                              from={from}
+                              to={to}
+                              departDate={departDate}
+                              returnDate={returnDate}
+                              passenger={passenger}
+                              token={token}
+                            /></h5>
+                          ) : null}
+                      </div>
                   </div>
-                </CardContent>
-              </Card>
-            </li>
-          ))}
-        </ul>
-      </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
     </div>
   );
 };

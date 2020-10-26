@@ -14,10 +14,9 @@ function App() {
           <Logo />
       </header>
       <main className='main'>  
-        <div className='content'>
       <Route path="/"  component={SearchBox} /> 
       <Route path="/favorites"  component={FavoritesScreen} /> 
-        </div>
+    
       </main>
     </div>
   </BrowserRouter>

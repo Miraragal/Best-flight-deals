@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import {
-  faGrinHearts,
+
   faHeart,
-  faHeartbeat,
-  faHeartBroken,
   faPlaneArrival,
   faPlaneDeparture,
   faSearch,
@@ -11,7 +9,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
-  FormControl,
   FormControlLabel,
   InputAdornment,
   MenuItem,
@@ -20,7 +17,7 @@ import {
   Select,
   IconButton,
   Radio,
-  TextField,
+  FormControl,
   Grid,
   Container,
 } from "@material-ui/core";
@@ -42,12 +39,20 @@ function SearchBox() {
   const [passenger, setPassenger] = useState(1);
   const [flights, setFlights] = useState([]);
   const [connections, setConnections] = useState([]);
+  const [isLoading, setIsLoading]=useState(true);
+  let myFlights=useRef();
 
   //We call componentDiMount
   useEffect(() => {
     myToken();
     findConnections();
-  }, [flights]);
+    if(myFlights.current){
+      window.scrollTo({
+        behavior: 'smooth',
+        top: myFlights.current.offsetTop
+      });
+    }
+  }, [isLoading,flights]);
 
   //To unwrap the promise. We define an async function that will be called when declared searchHandler
   const myToken = async () => {
@@ -144,6 +149,7 @@ function SearchBox() {
     setConnections([...stops]);
   };
 
+  
   return (
     <div>
       <Container>
@@ -164,6 +170,7 @@ function SearchBox() {
                   <label htmlFor="labels">From:</label>
                 </Grid>
                 <Grid item>
+                  <FormControl>
                   <OutlinedInput
                     className="inputBoxes"
                     value={from}
@@ -176,6 +183,7 @@ function SearchBox() {
                       </InputAdornment>
                     }
                   />
+                  </FormControl>
                 </Grid>
               </Grid>
 
@@ -184,6 +192,7 @@ function SearchBox() {
                   <label htmlFor="labels">To:</label>
                 </Grid>
                 <Grid item>
+                  <FormControl>
                   <OutlinedInput
                     className="inputBoxes"
                     value={to}
@@ -197,6 +206,7 @@ function SearchBox() {
                       </InputAdornment>
                     }
                   />
+                  </FormControl>
                 </Grid>
               </Grid>
               <Grid container xs={2} direction="column" spacing={1}>
@@ -290,7 +300,7 @@ function SearchBox() {
                   Go to your flights
                 </Grid>
       
-                <Grid item style={{marginRight:10}} >
+                <Grid item style={{marginRight:26}} >
                   <Button
                     className="search-button"
                     type="search"
@@ -307,7 +317,8 @@ function SearchBox() {
           </Grid>
         </form>
       </Container>
-
+      
+      <div ref={myFlights} >
       <RenderFlights
         flights={flights}
         connections={connections}
@@ -317,7 +328,8 @@ function SearchBox() {
         returnDate={returnDate}
         passenger={passenger}
         token={token}
-      />
+        />
+      </div>
       {/* <RenderConnections /> */}
     </div>
   )
