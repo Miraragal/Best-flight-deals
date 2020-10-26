@@ -75,7 +75,7 @@ export const RenderFlights = ({
 
   return (
     <div>
-      <Container style={{ backgroundColor: "#D3D3D3" }}>
+      <Container style={{flights}}>
         <div className="sort-fligths">
           {!(flights.length === 0) ? (
             <div className="icon-text">

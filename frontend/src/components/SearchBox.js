@@ -1,6 +1,5 @@
-import React, { useState, useEffect ,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
-
   faHeart,
   faPlaneArrival,
   faPlaneDeparture,
@@ -39,17 +38,17 @@ function SearchBox() {
   const [passenger, setPassenger] = useState(1);
   const [flights, setFlights] = useState([]);
   const [connections, setConnections] = useState([]);
-  const [isLoading, setIsLoading]=useState(true);
-  let myFlights=useRef();
+  const [isLoading, setIsLoading] = useState(true);
+  let myFlights = useRef();
 
   //We call componentDiMount
   useEffect(() => {
     myToken();
     findConnections();
-    if(myFlights.current){
-      window.scrollTo({
-        behavior: 'smooth',
-        top: myFlights.current.offsetTop
+    if (myFlights.current) {
+        window.scrollTo({
+        behavior: "smooth",
+        top: myFlights.current.offsetTop,
       });
     }
   }, [isLoading,flights]);
@@ -149,28 +148,25 @@ function SearchBox() {
     setConnections([...stops]);
   };
 
-  
   return (
     <div>
-      <Container>
-        <form onSubmit={searchHandler}>
-          <Grid container className="whiteBox">
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-              className="labels"
-              spacing={1}
-              style={{margin:10}}
-              
-            >
-              <Grid container xs={2} direction="column" spacing={1}>
-                <Grid item>
-                  <label htmlFor="labels">From:</label>
-                </Grid>
-                <Grid item>
-                  <FormControl>
+      <form onSubmit={searchHandler}>
+        <Grid container className="whiteBox">
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+            className="labels"
+            spacing={1}
+            style={{ margin: 10 }}
+          >
+            <Grid container xs={2} direction="column" spacing={1}>
+              <Grid item>
+                <label htmlFor="labels">From:</label>
+              </Grid>
+              <Grid item>
+                <FormControl>
                   <OutlinedInput
                     className="inputBoxes"
                     value={from}
@@ -183,16 +179,16 @@ function SearchBox() {
                       </InputAdornment>
                     }
                   />
-                  </FormControl>
-                </Grid>
+                </FormControl>
               </Grid>
+            </Grid>
 
-              <Grid container xs={2} direction="column" spacing={1}>
-                <Grid item>
-                  <label htmlFor="labels">To:</label>
-                </Grid>
-                <Grid item>
-                  <FormControl>
+            <Grid container xs={2} direction="column" spacing={1}>
+              <Grid item>
+                <label htmlFor="labels">To:</label>
+              </Grid>
+              <Grid item>
+                <FormControl>
                   <OutlinedInput
                     className="inputBoxes"
                     value={to}
@@ -206,133 +202,132 @@ function SearchBox() {
                       </InputAdornment>
                     }
                   />
-                  </FormControl>
-                </Grid>
+                </FormControl>
               </Grid>
-              <Grid container xs={2} direction="column" spacing={1}>
-                <Grid item>
-                  <label htmlFor="labels">Depart:</label>
-                </Grid>
-                <Grid item>
-                  <OutlinedInput
-                    className="inputBoxes"
-                    type="date"
-                    defaultValue=""
-                    onChange={(input) => setDepartDate(input.target.value)}
-                  />
-                </Grid>
+            </Grid>
+            <Grid container xs={2} direction="column" spacing={1}>
+              <Grid item>
+                <label htmlFor="labels">Depart:</label>
               </Grid>
-              <Grid container xs={2} direction="column" spacing={1}>
-                <Grid item>
-                  <label htmlFor="labels">Return:</label>
-                </Grid>
-                <Grid item>
-                  <OutlinedInput
-                    className="inputBoxes"
-                    type="date"
-                    disabled={returnInput}
-                    defaultValue=""
-                    onChange={(input) => setReturnDate(input.target.value)}
-                  />
-                </Grid>
+              <Grid item>
+                <OutlinedInput
+                  className="inputBoxes"
+                  type="date"
+                  defaultValue=""
+                  onChange={(input) => setDepartDate(input.target.value)}
+                />
               </Grid>
-              <Grid container xs={2} direction="column" spacing={1}>
-                <Grid item>
-                  <label htmlFor="labels">Passengers:</label>
-                </Grid>
-                <Grid item>
-                  <Select
-                    className="inputPassenger"
-                    variant="outlined"
-                    value={passenger}
-                    onChange={(input) => setPassenger(input.target.value)}
-                    >
-              
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                  </Select>
+            </Grid>
+            <Grid container xs={2} direction="column" spacing={1}>
+              <Grid item>
+                <label htmlFor="labels">Return:</label>
+              </Grid>
+              <Grid item>
+                <OutlinedInput
+                  className="inputBoxes"
+                  type="date"
+                  disabled={returnInput}
+                  defaultValue=""
+                  onChange={(input) => setReturnDate(input.target.value)}
+                />
+              </Grid>
+            </Grid>
+            <Grid container xs={2} direction="column" spacing={1}>
+              <Grid item>
+                <label htmlFor="labels">Passengers:</label>
+              </Grid>
+              <Grid item>
+                <Select
+                  className="inputPassenger"
+                  variant="outlined"
+                  value={passenger}
+                  onChange={(input) => setPassenger(input.target.value)}
+                >
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={4}>4</MenuItem>
+                </Select>
+              </Grid>
+            </Grid>
+          </Grid>
 
-                </Grid>
+          <Grid container direction="row" alignItems="center" spacing={1}>
+            <Grid
+              container
+              direction="row"
+              xs={4}
+              spacing={1}
+              style={{ marginLeft: 10 }}
+            >
+              <Grid item>
+                <RadioGroup row defaultValue="return">
+                  <FormControlLabel
+                    value="return"
+                    control={<Radio style={{ color: "#143E52" }} />}
+                    label="Roundtrip"
+                    onClick={inputHandler}
+                  />
+                  <FormControlLabel
+                    className="radio-button"
+                    value="one-way"
+                    control={<Radio style={{ color: "#143E52" }} />}
+                    label="One-way"
+                    onClick={inputHandler}
+                  />
+                </RadioGroup>
               </Grid>
             </Grid>
 
             <Grid
-                container
-                direction="row"  
-                alignItems="center"
-                spacing={1}
-                
+              container
+              xs={8}
+              direction="row"
+              spacing={1}
+              justify="flex-end"
             >
-           
-              <Grid container direction="row" xs={4} spacing={1} style={{marginLeft:10}}>
-                <Grid item>
-                  <RadioGroup row defaultValue="return"  >
-                  <FormControlLabel
-                      value="return"
-                      control={<Radio style={{color: '#143E52'}} />}
-                      label="Roundtrip"
-                      onClick={inputHandler}
-                    />
-                    <FormControlLabel
-                      className="radio-button"
-                      value="one-way"
-                      control={<Radio style={{color: '#143E52'}} />}
-                      label="One-way"
-                      onClick={inputHandler}
-                    />
-                  </RadioGroup>
-
-                </Grid>
+              <Grid item className="icon-text" style={{ marginRight: 10 }}>
+                <Link to="/favorites">
+                  <IconButton>
+                    <FontAwesomeIcon icon={faHeart} className="heart-button" />
+                  </IconButton>
+                </Link>
+                Go to your flights
               </Grid>
 
-              <Grid container xs={8} direction="row" spacing={1} justify="flex-end">
-                <Grid item className="icon-text" style={{marginRight:10}} >
-                  <Link to="/favorites" >
-                    <IconButton>
-                      <FontAwesomeIcon
-                        icon={faHeart}
-                        className="heart-button"
-                      />
-                    </IconButton>
-                  </Link>
-                  Go to your flights
-                </Grid>
-      
-                <Grid item style={{marginRight:26}} >
-                  <Button
-                    className="search-button"
-                    type="search"
-                    variant="contained"          
-                  >
-                    <FontAwesomeIcon icon={faSearch} style={{marginRight:15}}/>
-                    Search Flights
-                  </Button>
-                </Grid>
+              <Grid item style={{ marginRight: 26 }}>
+                <Button
+                  className="search-button"
+                  type="search"
+                  variant="contained"
+                >
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    style={{ marginRight: 15 }}
+                  />
+                  Search Flights
+                </Button>
               </Grid>
-
-           
             </Grid>
           </Grid>
-        </form>
-      </Container>
-      
-      <div ref={myFlights} >
-      <RenderFlights
-        flights={flights}
-        connections={connections}
-        from={from}
-        to={to}
-        departDate={departDate}
-        returnDate={returnDate}
-        passenger={passenger}
-        token={token}
+        </Grid>
+      </form>
+
+      <div ref={myFlights}>
+        <RenderFlights
+          flights={flights}
+          connections={connections}
+          from={from}
+          to={to}
+          departDate={departDate}
+          returnDate={returnDate}
+          passenger={passenger}
+          token={token}
         />
       </div>
-      {/* <RenderConnections /> */}
+     
     </div>
-  )
+  );
 }
 
 export default SearchBox;

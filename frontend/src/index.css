@@ -1,52 +1,49 @@
-/* //  BACKGROUND LANDINGPAGE // */
-
-html {
-  box-sizing: border-box;
-  background-image: url("/images/background/kenrick-mills-MF9Wy1NA55I-unsplash 2.png");
-}
+/* //  BACKGROUND // */
 
 body {
   margin: 0;
-  min-height: 100vh;
-
-  background-repeat: no-repeat;
-  background-size: cover;
+  padding: 0;
+  background-color: #E9EEF0;
 }
 
-/* // HEADERS H1,H2// */
-.headers {
-  padding: 134px 80px 78px 80px;
+/* // LANDINGPAGE // */
+.landingPage{
+  height: 100%;
+  box-sizing: border-box;
+  background-image: url("/images/background/kenrick-mills-MF9Wy1NA55I-unsplash 2.png"); 
+  padding: 148px 80px 40px 80px;
+  background-position: center center;
+  background-attachment: fixed;
 }
+.flights{
+  height: 100%;
+  background-color: yellow;
+  box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
+  border-radius: 20px;
+  padding: 10px 10px 10px 10px;
+  margin-top: 20px;
+  
+}
+/* //HEADERS // **/
 h1 {
-  height: 74px;
-  left: 78px;
-  top: 234px;
   font-family: Futura;
   font-size: 56px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
   letter-spacing: normal;
   text-align: left;
   color: #143e52;
+
 }
 h2 {
-  height: 43px;
-  left: 78px;
-  top: 336px;
   font-family: Futura;
   font-size: 32px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  /* identical to box height */
-  letter-spacing: normal;
   text-align: left;
   text-transform: uppercase;
   color: #143e52;
+  margin-bottom: 60px;
 }
+
 /* // SEARCH BOX // */
 .whiteBox {
   background: linear-gradient(0deg, #ffffff, #ffffff),
@@ -60,7 +57,6 @@ h2 {
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   border-radius: 20px;
   padding: 30px 30px 30px 30px;
-  width: 1280px;
   height: 285px;
 }
 .labels {

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { urlGetFlights } from "../data/config";
 import { airportsInfo } from "../data/airports";
 import { RenderConnections } from "./ConnectionDisplay";
-import { Button } from "@material-ui/core";
+import { Button, Switch } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 export const Connections = ({
   flight,
@@ -17,14 +18,12 @@ export const Connections = ({
 }) => {
   const [trip1, setTrip1] = useState();
   const [trip2, setTrip2] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (connections.length > 0) {
       console.log(`Connections Found:${connections}`);
     }
-    return () => {
-      //
-    };
   }, [connections]);
 
   //Searching for independents flights connections
@@ -109,20 +108,24 @@ export const Connections = ({
   };
 
   return (
-    <div>
-      <div className="connections-select">
+    <div className="connections-select">
+       
         <Button
           className="split-button"
-          onClick={() =>
+          onClick={() => {
             connectionSearch(
               flight.itineraries
                 .map((x) => x.segments[0].arrival.iataCode)
                 .reduce((a, b) => (a.includes(b) ? a : [a, b]))
-            )
-          }
-        >Split the flight</Button>
-      </div>
-      <RenderConnections trip1={trip1} trip2={trip2} />
+            );
+          }}
+        >
+          Split the flight
+        </Button>
+  
+      {trip1 && trip2 ? (
+        <RenderConnections trip1={trip1} trip2={trip2}/>
+      ) : null}
     </div>
   );
 };
