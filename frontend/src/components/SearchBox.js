@@ -26,6 +26,7 @@ import axios from "axios";
 import { airportsInfo } from "../data/airports";
 import { urlGetFlights } from "../data/config";
 import { RenderFlights } from "./FlightsDisplay";
+import { RenderConnections } from "./ConnectionDisplay";
 
 
 function SearchBox() {
@@ -340,6 +341,7 @@ function SearchBox() {
           token={token}
         />
       </div>
+      
     </div>
   );
 }

@@ -118,10 +118,10 @@ export const Connections = ({
             );
           }}
         >
-          Split the flight
+          Split the flight 
         </Button>
       </div>
-      <div>
+      <div >
         {trip1 && trip2 ? (
           <RenderConnections trip1={trip1} trip2={trip2} />
         ) : null}
