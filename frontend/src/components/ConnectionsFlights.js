@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { urlGetFlights } from "../data/config";
 import { airportsInfo } from "../data/airports";
 import { RenderConnections } from "./ConnectionDisplay";
-import { Button, Switch } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 export const Connections = ({
   flight,
@@ -18,7 +17,6 @@ export const Connections = ({
 }) => {
   const [trip1, setTrip1] = useState();
   const [trip2, setTrip2] = useState();
-  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (connections.length > 0) {
@@ -108,8 +106,8 @@ export const Connections = ({
   };
 
   return (
-    <div className="connections-select">
-       
+    <div>
+      <div className="connections-select">
         <Button
           className="split-button"
           onClick={() => {
@@ -122,10 +120,12 @@ export const Connections = ({
         >
           Split the flight
         </Button>
-  
-      {trip1 && trip2 ? (
-        <RenderConnections trip1={trip1} trip2={trip2}/>
-      ) : null}
+      </div>
+      <div>
+        {trip1 && trip2 ? (
+          <RenderConnections trip1={trip1} trip2={trip2} />
+        ) : null}
+      </div>
     </div>
   );
 };

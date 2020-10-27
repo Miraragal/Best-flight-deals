@@ -12,8 +12,6 @@ function App() {
       <BrowserRouter>
         <LandingPage basename='/'/>
         <Route path="/favorites" component={FavoritesScreen} />
-        <Route path="/split" component={RenderConnections} />
-  
       </BrowserRouter>
     </div>
   );

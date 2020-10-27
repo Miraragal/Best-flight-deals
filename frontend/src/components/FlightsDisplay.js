@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { faPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Button,
-  InputLabel,
-  Container,
-} from "@material-ui/core";
+import { Button, InputLabel, Container } from "@material-ui/core";
 import { Connections } from "./ConnectionsFlights";
 
 export const RenderFlights = ({
@@ -19,14 +15,14 @@ export const RenderFlights = ({
   token,
 }) => {
   const [data, setData] = useState([]);
-  const [currentSort, setCurrentSort] = useState("default");
+  const [currentSort, setCurrentSort] = useState("cheapest");
 
   useEffect(() => {
     console.log(`Sort by:${currentSort}`);
 
     const sortArray = (e) => {
       const sortTypes = {
-        cheapest: (a, b) => a.price.total - b.price.total,
+        cheapest: (a, b) => (a, b) => a,
         fastest: (a, b) =>
           parseFloat(
             a.itineraries[0].duration
@@ -62,7 +58,6 @@ export const RenderFlights = ({
               .replace(":", ".")
               .replace(/[^\d.-]/g, "")
           ),
-        default: (a, b) => a,
       };
       const sortProperty = sortTypes[e];
       const sorted = flights.sort(sortProperty);
@@ -75,13 +70,12 @@ export const RenderFlights = ({
 
   return (
     <div>
-      <Container style={{flights}}>
+      <Container style={{ flights }}>
         <div className="sort-fligths">
           {!(flights.length === 0) ? (
             <div className="icon-text">
               Sort by:{" "}
               <select onChange={(e) => setCurrentSort(e.target.value)}>
-                <option value="default">Default</option>
                 <option value="cheapest">Cheapest</option>
                 <option value="fastest">Fastest</option>
                 <option value="outboundStops"> Outbound: Stops</option>
@@ -123,58 +117,65 @@ export const RenderFlights = ({
                             {itinerary.segments.map((segment) => (
                               <li key={segment.id}>
                                 <div className="part1">
-                                {/* horas */}
-                                {segment.departure.at.slice(11, 16)}h&nbsp;
-                                {segment.arrival.at.slice(11, 16)}h
+                                  {/* horas */}
+                                  {segment.departure.at.slice(11, 16)}h&nbsp;
+                                  {segment.arrival.at.slice(11, 16)}h
                                 </div>
                                 {/* icon */}
                                 <div className="part2">
-                                <FontAwesomeIcon
-                                  icon={faPlane}
-                                  style={{ color: "#F2BF5D", justifyItems:'center'}}
-                                />&nbsp;
-                                {/* duration */}
-                                {segment.duration
-                                  .slice(2, segment.duration.length)
-                                  .replace("H", "h")
-                                  .replace("M", "")}
+                                  <FontAwesomeIcon
+                                    icon={faPlane}
+                                    style={{
+                                      color: "#F2BF5D",
+                                      justifyItems: "center",
+                                    }}
+                                  />
+                                  &nbsp;
+                                  {/* duration */}
+                                  {segment.duration
+                                    .slice(2, segment.duration.length)
+                                    .replace("H", "h")
+                                    .replace("M", "")}
                                 </div>
                                 <div className="part3">
-                                {/* airports */}
-                                {segment.departure.iataCode}&nbsp;
-                                {segment.arrival.iataCode}
+                                  {/* airports */}
+                                  {segment.departure.iataCode}&nbsp;
+                                  {segment.arrival.iataCode}
                                 </div>
-                                <br/>
+                                <br />
                               </li>
                             ))}
                           </div>
                         </div>
-                      
                       </li>
                     ))}
-                      <div className="item">
-                        <h3>{flight.price.total}
-                            {flight.price.currency}</h3>
-                          <Button className="select-button" variant="contained">
-                           Select
-                          </Button>
-                          
-                          {flight.itineraries
-                            .map((e) => e.segments.length)
-                            .every(showIconPin) ? ( 
-                            <h6 className="icon-text">want more flights?
-                            <Connections
-                              flight={flight}
-                              connections={connections}
-                              from={from}
-                              to={to}
-                              departDate={departDate}
-                              returnDate={returnDate}
-                              passenger={passenger}
-                              token={token}
-                            /></h6>
-                          ) : null}
-                      </div>
+                    <div className="item">
+                      <h3>
+                        {flight.price.total}
+                        {flight.price.currency}
+                      </h3>
+                      <Button className="select-button" variant="contained">
+                        Select
+                      </Button>
+
+                      {flight.itineraries
+                        .map((e) => e.segments.length)
+                        .every(showIconPin) ? (
+                        <h6 className="icon-text">
+                          want more flights?
+                          <Connections
+                            flight={flight}
+                            connections={connections}
+                            from={from}
+                            to={to}
+                            departDate={departDate}
+                            returnDate={returnDate}
+                            passenger={passenger}
+                            token={token}
+                          />
+                        </h6>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </li>

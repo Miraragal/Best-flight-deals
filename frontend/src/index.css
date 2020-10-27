@@ -1,29 +1,21 @@
 /* //  BACKGROUND // */
-
 body {
   margin: 0;
   padding: 0;
-  background-color: #E9EEF0;
+  background-color: #e9eef0;
 }
 
 /* // LANDINGPAGE // */
-.landingPage{
-  height: 100%;
-  box-sizing: border-box;
-  background-image: url("/images/background/kenrick-mills-MF9Wy1NA55I-unsplash 2.png"); 
+.landingPage {
+  height: 100vh;
+  background-image: url("/images/background/kenrick-mills-MF9Wy1NA55I-unsplash 2.png");
   padding: 148px 80px 40px 80px;
+  background-size: cover;
   background-position: center center;
   background-attachment: fixed;
+  box-sizing: border-box;
 }
-.flights{
-  height: 100%;
-  background-color: yellow;
-  box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
-  border-radius: 20px;
-  padding: 10px 10px 10px 10px;
-  margin-top: 20px;
-  
-}
+
 /* //HEADERS // **/
 h1 {
   font-family: Futura;
@@ -32,7 +24,6 @@ h1 {
   letter-spacing: normal;
   text-align: left;
   color: #143e52;
-
 }
 h2 {
   font-family: Futura;
@@ -58,6 +49,7 @@ h2 {
   border-radius: 20px;
   padding: 30px 30px 30px 30px;
   height: 285px;
+  margin-top: 100px;
 }
 .labels {
   font-family: Futura;
@@ -76,7 +68,6 @@ h2 {
   background-color: #ffffff;
   border: solid 1px #143e52;
 }
-
 .inputPassenger {
   min-width: 168px;
   height: 58px;
@@ -128,19 +119,16 @@ select {
   margin-top: 45px;
 }
 .card {
-  height: fit-content;
   background: linear-gradient(0deg, #ffffff, #ffffff);
   border-radius: 20px;
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
-  padding: 0px 10px 25px 10px;
-  margin-bottom: 20px;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 12px;
 }
 li {
   list-style-type: none;
 }
 h4 {
-  left: 104px;
-  top: 1010px;
   font-family: Futura;
   font-style: normal;
   font-weight: bold;
@@ -151,8 +139,6 @@ h4 {
   margin-bottom: 15px;
 }
 h5 {
-  left: 104px;
-  top: 1053px;
   font-family: Futura;
   font-style: normal;
   font-weight: 500;
@@ -185,7 +171,7 @@ h5 {
 }
 .itineraries {
   border-right: 1px solid #adc0c9;
-  height: 300px;
+  height: auto;
   margin-right: 60px;
 }
 .part1 {
@@ -207,7 +193,7 @@ h5 {
   word-spacing: 155px;
   letter-spacing: 2px;
 }
-.item{
+.item {
   display: grid;
   padding: 1px;
   align-self: center;
@@ -216,8 +202,6 @@ h5 {
   padding: 0px;
 }
 h3 {
-  left: 1071px;
-  top: 1048px;
   font-family: Futura;
   font-style: normal;
   font-weight: bold;
@@ -228,15 +212,13 @@ h3 {
   text-align: center;
 }
 h6 {
-left: 1074px;
-top: 1174px;
-font-family: Futura;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 21px;
-color: #43697E;
-text-align: center;
+  font-family: Futura;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  color: #43697e;
+  text-align: center;
 }
 .select-button {
   width: 175px;
@@ -248,21 +230,58 @@ text-align: center;
 .select-button:hover {
   color: #f2bf5d !important;
 }
-.split-button{
-font-family: Futura;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 26px;
-align-items: center;
-text-align: center;
-color: #43697E !important;
-border: 1px solid #43697E!important;
-box-sizing: border-box !important;
-border-radius: 10px;
-margin-top: 10px !important;
+.split-button {
+  font-family: Futura;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  align-items: center;
+  text-align: center;
+  color: #43697e !important;
+  border: 1px solid #43697e !important;
+  box-sizing: border-box !important;
+  border-radius: 10px;
+  margin-top: 10px !important;
 }
 .split-button:hover {
   color: #f2bf5d !important;
 }
 /* // FLIGHTS SPLIT RESULT // */
+.split-menu {
+  display: inline-flex;
+}
+.split-table {
+  border-radius: 20px;
+  box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
+  padding: 0px 10px 10px 10px;
+  background-color: rgba(67,105,126,0.75);
+}
+.split-cell{
+  font-family: Futura !important;
+  color: #ffffff !important;
+}
+.split-header{
+border-bottom: 4px solid #ADC0C9;
+}
+.split-sort{
+  font-family: Futura !important;
+  color: #43697e !important;
+  border: 1px solid #43697e !important;
+  box-sizing: border-box !important; 
+  width: fit-content;
+  background-color: #e9eef0;
+  margin-top: 0px;
+  height: min-content;
+}
+.split-select{
+  font-family: Futura !important;
+  color: #43697e !important;
+  border: 1px solid #43697e !important;
+  box-sizing: border-box !important; 
+  margin-top: 50px !important;
+  background-color: #e9eef0 !important;
+}
+.split-select:hover {
+  color: #f2bf5d !important;
+}

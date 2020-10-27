@@ -26,15 +26,15 @@ import axios from "axios";
 import { airportsInfo } from "../data/airports";
 import { urlGetFlights } from "../data/config";
 import { RenderFlights } from "./FlightsDisplay";
-//import {RenderConnections } from './ConnectionsFlights'
+
 
 function SearchBox() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [returnInput, setReturnInput] = useState(false);
   const [token, setToken] = useState("");
-  const [departDate, setDepartDate] = useState(new Date());
-  const [returnDate, setReturnDate] = useState(new Date());
+  const [departDate, setDepartDate] = useState();
+  const [returnDate, setReturnDate] = useState();
   const [passenger, setPassenger] = useState(1);
   const [flights, setFlights] = useState([]);
   const [connections, setConnections] = useState([]);
@@ -46,12 +46,12 @@ function SearchBox() {
     myToken();
     findConnections();
     if (myFlights.current) {
-        window.scrollTo({
+      window.scrollTo({
         behavior: "smooth",
         top: myFlights.current.offsetTop,
       });
     }
-  }, [isLoading,flights]);
+  }, [isLoading, flights]);
 
   //To unwrap the promise. We define an async function that will be called when declared searchHandler
   const myToken = async () => {
@@ -104,7 +104,7 @@ function SearchBox() {
         : "Not found"
     );
 
-    const Flightdata = {
+    const FlightdataRoundtrip = {
       originLocationCode: originCode[0].IATACODE, //string
       destinationLocationCode: destinationCode[1].IATACODE, //string
       departureDate: departDate, //ISO 8601 YYYY-MM-DD
@@ -114,11 +114,27 @@ function SearchBox() {
       max: 250, //integer (max number of flights offerts to return-default paramater)
     };
 
-    const urlParams = Object.keys(Flightdata)
-      .map(function (key) {
-        return key + "=" + Flightdata[key];
-      })
-      .join("&");
+    const FlightdataOne = {
+      originLocationCode: originCode[0].IATACODE, //string
+      destinationLocationCode: destinationCode[1].IATACODE, //string
+      departureDate: departDate, //ISO 8601 YYYY-MM-DD
+      adults: passenger, // integer
+      nonStop: false, //boolean
+      max: 250, //integer (max number of flights offerts to return-default paramater)
+    };
+
+    const urlParams =
+      returnDate !== undefined
+        ? Object.keys(FlightdataRoundtrip)
+            .map(function (key) {
+              return key + "=" + FlightdataRoundtrip[key];
+            })
+            .join("&")
+        : Object.keys(FlightdataOne)
+            .map(function (key) {
+              return key + "=" + FlightdataOne[key];
+            })
+            .join("&");
 
     //Token to be sent to the GEST request:
     axios({
@@ -192,7 +208,6 @@ function SearchBox() {
                   <OutlinedInput
                     className="inputBoxes"
                     value={to}
-                    disabled={returnInput}
                     placeholder="Enter city or airport"
                     onChange={(input) => setTo(input.target.value)}
                     startAdornment={
@@ -325,7 +340,6 @@ function SearchBox() {
           token={token}
         />
       </div>
-     
     </div>
   );
 }
