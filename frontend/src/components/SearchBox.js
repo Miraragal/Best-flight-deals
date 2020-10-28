@@ -18,7 +18,6 @@ import {
   Radio,
   FormControl,
   Grid,
-  Container,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { getToken } from "../data/auth";
@@ -26,7 +25,7 @@ import axios from "axios";
 import { airportsInfo } from "../data/airports";
 import { urlGetFlights } from "../data/config";
 import { RenderFlights } from "./FlightsDisplay";
-import { RenderConnections } from "./ConnectionDisplay";
+
 
 
 function SearchBox() {

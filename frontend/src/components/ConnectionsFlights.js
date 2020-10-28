@@ -3,7 +3,7 @@ import axios from "axios";
 import { urlGetFlights } from "../data/config";
 import { airportsInfo } from "../data/airports";
 import { RenderConnections } from "./ConnectionDisplay";
-import { Button } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
 
 export const Connections = ({
   flight,
@@ -107,7 +107,6 @@ export const Connections = ({
 
   return (
     <div>
-      <div className="connections-select">
         <Button
           className="split-button"
           onClick={() => {
@@ -120,12 +119,10 @@ export const Connections = ({
         >
           Split the flight 
         </Button>
-      </div>
-      <div >
+     
         {trip1 && trip2 ? (
           <RenderConnections trip1={trip1} trip2={trip2} />
         ) : null}
-      </div>
     </div>
   );
 };

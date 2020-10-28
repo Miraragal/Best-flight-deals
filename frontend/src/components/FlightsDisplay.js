@@ -3,6 +3,8 @@ import { faPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, InputLabel, Container } from "@material-ui/core";
 import { Connections } from "./ConnectionsFlights";
+import { RenderConnections } from "./ConnectionDisplay";
+
 
 export const RenderFlights = ({
   flights,
@@ -93,7 +95,7 @@ export const RenderFlights = ({
           ) : null}
         </div>
 
-        <div className="render-flights">
+      <div className="render-flights">
           <ul>
             {flights.map((flight) => (
               <li key={flight.id}>
@@ -182,6 +184,7 @@ export const RenderFlights = ({
             ))}
           </ul>
         </div>
+  
       </Container>
     </div>
   );

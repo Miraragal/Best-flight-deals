@@ -3,8 +3,7 @@ import "./index.css";
 import { BrowserRouter, Route } from "react-router-dom";
 import LandingPage from "./components/HomePage";
 import FavoritesScreen from "./components/FavoritesScreen";
-import { RenderConnections } from "./components/ConnectionDisplay";
-import { Switch } from "@material-ui/core";
+
 
 function App() {
   return (

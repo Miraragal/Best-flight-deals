@@ -9,6 +9,7 @@ import {
   TableContainer,
   TableRow,
   TableHead,
+  Container,
 } from "@material-ui/core";
 
 export const RenderConnections = ({ trip1, trip2 }) => {
@@ -21,7 +22,7 @@ export const RenderConnections = ({ trip1, trip2 }) => {
   useEffect(() => {
     console.log("Trip1 Found:", trip1);
     console.log("Trip2 Found:", trip2);
-    console.log(`Connection Sort by:${currentSortTrip1, currentSortTrip2}`);
+    console.log(`Connection Sort by:${currentSortTrip1}`);
       const sortArray = (e) => {
         const sortTypes = {
           cheapest: (a, b) => (a, b) => a,
@@ -267,11 +268,13 @@ export const RenderConnections = ({ trip1, trip2 }) => {
 
 
   return (
-    <div className="split-container">
+    <div>
+         <Container className="split-container">
       <ul className="split-menu">
         <li>{body1}</li>
         <li>{body2}</li>
       </ul>
+         </Container>
     </div>
   );
 };

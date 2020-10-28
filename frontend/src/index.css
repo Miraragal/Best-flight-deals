@@ -124,6 +124,7 @@ select {
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   padding: 5px 10px 5px 10px;
   margin-bottom: 12px;
+
 }
 li {
   list-style-type: none;
@@ -161,9 +162,9 @@ h5 {
   color: #143e52;
 }
 .container {
-  display: grid;
+ display: inline-flex;
+ grid-template-columns: auto auto auto;
   padding: 1px;
-  grid-template-columns: auto auto 300px;
   grid-gap: 10px;
   text-align: left;
   margin-left: 30px;
@@ -172,7 +173,9 @@ h5 {
 .itineraries {
   border-right: 1px solid #adc0c9;
   height: auto;
-  margin-right: 60px;
+  padding-right: 50px;
+  margin-left: 10px;
+ 
 }
 .part1 {
   font-size: 16px;
@@ -194,10 +197,7 @@ h5 {
   letter-spacing: 2px;
 }
 .item {
-  display: grid;
-  padding: 1px;
-  align-self: center;
-  justify-self: center;
+ 
   margin-top: 50px;
   padding: 0px;
 }
@@ -209,7 +209,7 @@ h3 {
   line-height: 32px;
   /* identical to box height */
   color: #143e52;
-  text-align: center;
+
 }
 h6 {
   font-family: Futura;
@@ -218,7 +218,7 @@ h6 {
   font-size: 16px;
   line-height: 21px;
   color: #43697e;
-  text-align: center;
+  
 }
 .select-button {
   width: 175px;
@@ -236,7 +236,6 @@ h6 {
   font-weight: 500;
   font-size: 16px;
   line-height: 26px;
-  align-items: center;
   text-align: center;
   color: #43697e !important;
   border: 1px solid #43697e !important;
@@ -249,8 +248,13 @@ h6 {
 }
 
 /* // FLIGHTS SPLIT RESULT // */
+.split-container{
+  padding: 1px;
+  
+
+}
 .split-menu {
-  display: inline-flex;
+  display: flex;
 }
 .split-table {
   border-radius: 20px;
