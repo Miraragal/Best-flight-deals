@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { faPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, InputLabel, Container } from "@material-ui/core";
+import {
+  Button,
+  InputLabel,
+  Container,
+  TablePagination,
+} from "@material-ui/core";
 import { Connections } from "./ConnectionsFlights";
 import { RenderConnections } from "./ConnectionDisplay";
-
 
 export const RenderFlights = ({
   flights,
@@ -18,6 +22,8 @@ export const RenderFlights = ({
 }) => {
   const [data, setData] = useState([]);
   const [currentSort, setCurrentSort] = useState("cheapest");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
     console.log(`Sort by:${currentSort}`);
@@ -70,6 +76,14 @@ export const RenderFlights = ({
 
   const showIconPin = (value) => value > 1;
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(1);
+  };
+
   return (
     <div>
       <Container style={{ flights }}>
@@ -91,13 +105,22 @@ export const RenderFlights = ({
                   Return: Departure time
                 </option>
               </select>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 15, 20]}
+                count={flights.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
             </div>
           ) : null}
+
         </div>
 
-      <div className="render-flights">
+        <div className="render-flights">
           <ul>
-            {flights.map((flight) => (
+            {flights.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((flight) => (
               <li key={flight.id}>
                 <div className="card">
                   <div className="container">
@@ -184,7 +207,6 @@ export const RenderFlights = ({
             ))}
           </ul>
         </div>
-  
       </Container>
     </div>
   );

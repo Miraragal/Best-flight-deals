@@ -242,6 +242,7 @@ h6 {
   box-sizing: border-box !important;
   border-radius: 10px;
   margin-top: 10px !important;
+  float: none;
 }
 .split-button:hover {
   color: #f2bf5d !important;
@@ -250,17 +251,19 @@ h6 {
 /* // FLIGHTS SPLIT RESULT // */
 .split-container{
   padding: 1px;
-  
-
+  float: none;
+  position: relative; 
+  right: 70%;
 }
 .split-menu {
-  display: flex;
+  display: flex; 
 }
 .split-table {
   border-radius: 20px;
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   padding: 0px 10px 10px 10px;
   background-color: rgba(67,105,126,0.75);
+
 }
 .split-cell{
   font-family: Futura !important;
@@ -268,6 +271,8 @@ h6 {
 }
 .split-header{
 border-bottom: 4px solid #ADC0C9;
+align-content: center;
+text-align: center;
 }
 .split-sort{
   font-family: Futura !important;
@@ -278,6 +283,11 @@ border-bottom: 4px solid #ADC0C9;
   background-color: #e9eef0;
   margin-top: 0px;
   height: min-content;
+}
+.split-rows{
+  font-family: Futura !important;
+  border: 0px !important;
+  color: #43697e!important;
 }
 .split-select{
   font-family: Futura !important;
