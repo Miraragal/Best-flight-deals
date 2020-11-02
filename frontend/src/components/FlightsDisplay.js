@@ -8,7 +8,7 @@ import {
   TablePagination,
 } from "@material-ui/core";
 import { Connections } from "./ConnectionsFlights";
-import { RenderConnections } from "./ConnectionDisplay";
+
 
 export const RenderFlights = ({
   flights,
@@ -25,53 +25,11 @@ export const RenderFlights = ({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+
   useEffect(() => {
     console.log(`Sort by:${currentSort}`);
-
-    const sortArray = (e) => {
-      const sortTypes = {
-        cheapest: (a, b) => (a, b) => a,
-        fastest: (a, b) =>
-          parseFloat(
-            a.itineraries[0].duration
-              .slice(2)
-              .replace("H", ".")
-              .replace("M", "")
-              .replace(/[^\d.-]/g, "")
-          ) -
-          parseFloat(
-            b.itineraries[0].duration
-              .slice(2)
-              .replace("H", ".")
-              .replace("M", "")
-              .replace(/[^\d.-]/g, "")
-          ),
-        outboundStops: (a, b) =>
-          a.itineraries[0].segments.length - b.itineraries[0].segments.length,
-        returnStops: (a, b) =>
-          a.itineraries[1].segments.length - b.itineraries[1].segments.length,
-        outboundDepartureT: (a, b) =>
-          a.itineraries[0].segments[0].departure.at -
-          b.itineraries[0].segments[0].departure.at,
-        returnDepartureT: (a, b) =>
-          parseFloat(
-            a.itineraries[1].segments[0].departure.at
-              .slice(11)
-              .replace(":", ".")
-              .replace(/[^\d.-]/g, "")
-          ) -
-          parseFloat(
-            b.itineraries[1].segments[0].departure.at
-              .slice(11)
-              .replace(":", ".")
-              .replace(/[^\d.-]/g, "")
-          ),
-      };
-      const sortProperty = sortTypes[e];
-      const sorted = flights.sort(sortProperty);
-      setData(sorted);
-    };
-    sortArray(currentSort);
+    setData(currentSort);
+    
   }, [currentSort]);
 
   const showIconPin = (value) => value > 1;
@@ -84,6 +42,52 @@ export const RenderFlights = ({
     setPage(1);
   };
 
+ 
+  const handleSort = (e) => {
+    const sortTypes = {
+      cheapest: (a, b) => a.price.total - b.price.total,
+      fastest: (a, b) =>
+        parseFloat(
+          a.itineraries[0].duration
+            .slice(2)
+            .replace("H", ".")
+            .replace("M", "")
+            .replace(/[^\d.-]/g, "")
+        ) -
+        parseFloat(
+          b.itineraries[0].duration
+            .slice(2)
+            .replace("H", ".")
+            .replace("M", "")
+            .replace(/[^\d.-]/g, "")
+        ),
+      outboundStops: (a, b) =>
+        a.itineraries[0].segments.length - b.itineraries[0].segments.length,
+      returnStops: (a, b) =>
+        a.itineraries[1].segments.length - b.itineraries[1].segments.length,
+      outboundDepartureT: (a, b) =>
+        a.itineraries[0].segments[0].departure.at -
+        b.itineraries[0].segments[0].departure.at,
+      returnDepartureT: (a, b) =>
+        parseFloat(
+          a.itineraries[1].segments[0].departure.at
+            .slice(11)
+            .replace(":", ".")
+            .replace(/[^\d.-]/g, "")
+        ) -
+        parseFloat(
+          b.itineraries[1].segments[0].departure.at
+            .slice(11)
+            .replace(":", ".")
+            .replace(/[^\d.-]/g, "")
+        ),
+    };
+    const sortProperty = sortTypes[e];
+    const sorted = flights.sort(sortProperty)
+    setCurrentSort(e)
+  };
+ 
+
   return (
     <div>
       <Container style={{ flights }}>
@@ -91,7 +95,7 @@ export const RenderFlights = ({
           {!(flights.length === 0) ? (
             <div className="icon-text">
               Sort by:{" "}
-              <select onChange={(e) => setCurrentSort(e.target.value)}>
+              <select onChange={(e) => handleSort(e.target.value)}>
                 <option value="cheapest">Cheapest</option>
                 <option value="fastest">Fastest</option>
                 <option value="outboundStops"> Outbound: Stops</option>
@@ -115,12 +119,11 @@ export const RenderFlights = ({
               />
             </div>
           ) : null}
-
         </div>
 
         <div className="render-flights">
-          <ul>
-            {flights.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((flight) => (
+          <ul> 
+          {flights.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((flight) => (
               <li key={flight.id}>
                 <div className="card">
                   <div className="container">

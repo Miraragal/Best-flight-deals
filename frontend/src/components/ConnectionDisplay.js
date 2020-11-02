@@ -23,87 +23,82 @@ export const RenderConnections = ({ trip1, trip2 }) => {
   const [rowsPerPageTrip1, setRowsPerPageTrip1] = useState(2);
   const [rowsPerPageTrip2, setRowsPerPageTrip2] = useState(2);
 
-  const handleChangePageTrip1 = (event,newPage) => {
-    setPageTrip1(newPage);
-  };
-  const handleChangeRowsPerPageTrip1 = (event) => {
-    setRowsPerPageTrip1(parseInt(event.target.value,10));
-    setPageTrip1(1);
-  };
-  const handleChangePageTrip2 = (event,newPage) => {
-    setPageTrip2(newPage);
-  };
-
-  const handleChangeRowsPerPageTrip2 = (event) => {
-    setRowsPerPageTrip2(parseInt(event.target.value,10));
-    setPageTrip2(1);
-  };
-
   useEffect(() => {
     console.log("Trip1 Found:", trip1);
     console.log("Trip2 Found:", trip2);
-    console.log(`Connection Sort by:${currentSortTrip1}`);
-    const sortArray = (e) => {
-      const sortTypes = {
-        cheapest: (a, b) => (a, b) => a,
-        fastest: (a, b) =>
-          parseFloat(
-            a.itineraries[0].duration
-              .slice(2)
-              .replace("H", ".")
-              .replace("M", "")
-              .replace(/[^\d.-]/g, "")
-          ) -
-          parseFloat(
-            b.itineraries[0].duration
-              .slice(2)
-              .replace("H", ".")
-              .replace("M", "")
-              .replace(/[^\d.-]/g, "")
-          ),
-        outboundDepartureT: (a, b) =>
-          a.itineraries[0].segments[0].departure.at -
-          b.itineraries[0].segments[0].departure.at,
-        returnDepartureT: (a, b) =>
-          parseFloat(
-            a.itineraries[1].segments[0].departure.at
-              .slice(11)
-              .replace(":", ".")
-              .replace(/[^\d.-]/g, "")
-          ) -
-          parseFloat(
-            b.itineraries[1].segments[0].departure.at
-              .slice(11)
-              .replace(":", ".")
-              .replace(/[^\d.-]/g, "")
-          ),
-      };
-      const sortProperty = sortTypes[e];
-      const sorted1 = trip1.sort(sortProperty);
-      const sorted2 = trip2.sort(sortProperty);
-      setData1(sorted1);
-      setData2(sorted2);
-    };
-    sortArray(currentSortTrip1);
-    sortArray(currentSortTrip2);
+    console.log(`Connection 2 Sort by:${currentSortTrip2}`);
+    setData1(currentSortTrip1);
+    console.log(`Connection 1 Sort by:${currentSortTrip1}`);
+    setData2(currentSortTrip2);
   }, [currentSortTrip1, currentSortTrip2]);
 
-  
-  const body2 = (
+  // SPLIT - FIRST CONNECTION //
+  const handleSortTrip1 = (e) => {
+    const sortTypes = {
+      cheapest: (a, b) => a.price.total - b.price.total,
+      fastest: (a, b) =>
+        parseFloat(
+          a.itineraries[0].duration
+            .slice(2)
+            .replace("H", ".")
+            .replace("M", "")
+            .replace(/[^\d.-]/g, "")
+        ) -
+        parseFloat(
+          b.itineraries[0].duration
+            .slice(2)
+            .replace("H", ".")
+            .replace("M", "")
+            .replace(/[^\d.-]/g, "")
+        ),
+      outboundStops: (a, b) =>
+        a.itineraries[0].segments.length - b.itineraries[0].segments.length,
+      returnStops: (a, b) =>
+        a.itineraries[1].segments.length - b.itineraries[1].segments.length,
+      outboundDepartureT: (a, b) =>
+        a.itineraries[0].segments[0].departure.at -
+        b.itineraries[0].segments[0].departure.at,
+      returnDepartureT: (a, b) =>
+        parseFloat(
+          a.itineraries[1].segments[0].departure.at
+            .slice(11)
+            .replace(":", ".")
+            .replace(/[^\d.-]/g, "")
+        ) -
+        parseFloat(
+          b.itineraries[1].segments[0].departure.at
+            .slice(11)
+            .replace(":", ".")
+            .replace(/[^\d.-]/g, "")
+        ),
+    };
+
+    const sortProperty = sortTypes[e];
+    const sorted1 = trip1.sort(sortProperty);
+    setCurrentSortTrip1(e);
+  };
+  const handleChangePageTrip1 = (event, newPage) => {
+    setPageTrip1(newPage);
+  };
+  const handleChangeRowsPerPageTrip1 = (event) => {
+    setRowsPerPageTrip1(parseInt(event.target.value, 10));
+    setPageTrip1(1);
+  };
+  const body1 = (
     <ul>
       <TableContainer className="split-table">
         <Table>
           <TableHead className="split-header">
             <h3 style={{ textAlign: "center", marginBottom: "10" }}>
               Outbound Connections: &nbsp;
-              {trip2[0].itineraries[0].segments[0].departure.iataCode}-
-              {trip2[0].itineraries[0].segments[0].arrival.iataCode}
+              {trip1[0].itineraries[0].segments[0].departure.iataCode}-
+              {trip1[0].itineraries[0].segments[0].arrival.iataCode}
             </h3>
             <p style={{ fontSize: "10" }}>
               Sort by:
               <select
                 className="split-sort"
-                onChange={(e) => setCurrentSortTrip2(e.target.value)}
+                onChange={(e) => handleSortTrip1(e.target.value)}
               >
                 <option value="cheapest">Cheapest</option>
                 <option value="fastest">Fastest</option>
@@ -119,17 +114,20 @@ export const RenderConnections = ({ trip1, trip2 }) => {
               <TablePagination
                 className="split-rows"
                 rowsPerPageOptions={[2, 4, 8, 16]}
-                count={trip2.length}
-                rowsPerPage={rowsPerPageTrip2}
-                page={pageTrip2}
-                onChangePage={handleChangePageTrip2}
-                onChangeRowsPerPage={handleChangeRowsPerPageTrip2}
+                count={trip1.length}
+                rowsPerPage={rowsPerPageTrip1}
+                page={pageTrip1}
+                onChangePage={handleChangePageTrip1}
+                onChangeRowsPerPage={handleChangeRowsPerPageTrip1}
               />
             </p>
           </TableHead>
           <TableRow style={{ marginBottom: "10" }}>
-            {trip2
-              .slice(pageTrip2 * rowsPerPageTrip2, pageTrip2 * rowsPerPageTrip2 + rowsPerPageTrip2)
+            {trip1
+              .slice(
+                pageTrip1 * rowsPerPageTrip1,
+                pageTrip1 * rowsPerPageTrip1 + rowsPerPageTrip1
+              )
               .map((flight) => (
                 <li key={flight.id} className="split-menu">
                   {flight.itineraries.map((itinerary, index) => (
@@ -202,22 +200,75 @@ export const RenderConnections = ({ trip1, trip2 }) => {
       </TableContainer>
     </ul>
   );
+  // SPLIT - SECOND CONNECTION //
+  const handleSortTrip2 = (e) => {
+    const sortTypes = {
+      cheapest: (a, b) => a.price.total - b.price.total,
+      fastest: (a, b) =>
+        parseFloat(
+          a.itineraries[0].duration
+            .slice(2)
+            .replace("H", ".")
+            .replace("M", "")
+            .replace(/[^\d.-]/g, "")
+        ) -
+        parseFloat(
+          b.itineraries[0].duration
+            .slice(2)
+            .replace("H", ".")
+            .replace("M", "")
+            .replace(/[^\d.-]/g, "")
+        ),
+      outboundStops: (a, b) =>
+        a.itineraries[0].segments.length - b.itineraries[0].segments.length,
+      returnStops: (a, b) =>
+        a.itineraries[1].segments.length - b.itineraries[1].segments.length,
+      outboundDepartureT: (a, b) =>
+        a.itineraries[0].segments[0].departure.at -
+        b.itineraries[0].segments[0].departure.at,
+      returnDepartureT: (a, b) =>
+        parseFloat(
+          a.itineraries[1].segments[0].departure.at
+            .slice(11)
+            .replace(":", ".")
+            .replace(/[^\d.-]/g, "")
+        ) -
+        parseFloat(
+          b.itineraries[1].segments[0].departure.at
+            .slice(11)
+            .replace(":", ".")
+            .replace(/[^\d.-]/g, "")
+        ),
+    };
 
-  const body1 = (
+    const sortProperty = sortTypes[e];
+    const sorted2 = trip2.sort(sortProperty);
+    setCurrentSortTrip2(e);
+  };
+  const handleChangePageTrip2 = (event, newPage) => {
+    setPageTrip2(newPage);
+  };
+
+  const handleChangeRowsPerPageTrip2 = (event) => {
+    setRowsPerPageTrip2(parseInt(event.target.value, 10));
+    setPageTrip2(1);
+  };
+
+  const body2 = (
     <ul>
       <TableContainer className="split-table">
         <Table>
           <TableHead className="split-header">
             <h3 style={{ textAlign: "center", marginBottom: "10" }}>
               Outbound Connections: &nbsp;
-              {trip1[0].itineraries[0].segments[0].departure.iataCode}-
-              {trip1[0].itineraries[0].segments[0].arrival.iataCode}
+              {trip2[0].itineraries[0].segments[0].departure.iataCode}-
+              {trip2[0].itineraries[0].segments[0].arrival.iataCode}
             </h3>
             <p style={{ fontSize: "10" }}>
               Sort by:
               <select
                 className="split-sort"
-                onChange={(e) => setCurrentSortTrip1(e.target.value)}
+                onChange={(e) => handleSortTrip2(e.target.value)}
               >
                 <option value="cheapest">Cheapest</option>
                 <option value="fastest">Fastest</option>
@@ -233,17 +284,20 @@ export const RenderConnections = ({ trip1, trip2 }) => {
               <TablePagination
                 className="split-rows"
                 rowsPerPageOptions={[2, 4, 8, 16]}
-                count={trip1.length}
-                rowsPerPage={rowsPerPageTrip1}
-                page={pageTrip1}
-                onChangePage={handleChangePageTrip1}
-                onChangeRowsPerPage={handleChangeRowsPerPageTrip1}
+                count={trip2.length}
+                rowsPerPage={rowsPerPageTrip2}
+                page={pageTrip2}
+                onChangePage={handleChangePageTrip2}
+                onChangeRowsPerPage={handleChangeRowsPerPageTrip2}
               />
             </p>
           </TableHead>
           <TableRow style={{ marginBottom: "10" }}>
-            {trip1
-              .slice(pageTrip1 * rowsPerPageTrip1, pageTrip1 * rowsPerPageTrip1 + rowsPerPageTrip1)
+            {trip2
+              .slice(
+                pageTrip2 * rowsPerPageTrip2,
+                pageTrip2 * rowsPerPageTrip2 + rowsPerPageTrip2
+              )
               .map((flight) => (
                 <li key={flight.id} className="split-menu">
                   {flight.itineraries.map((itinerary, index) => (
