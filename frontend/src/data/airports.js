@@ -8085,12 +8085,6 @@ export const airportsInfo = [
     COUNTRY: "United States",
   },
   {
-    IATACODE: "XTI",
-    AIRPORT_NAME: "Chamartin Railway Station Airport",
-    LOCATION: "Madrid",
-    COUNTRY: "Spain",
-  },
-  {
     IATACODE: "YNO",
     AIRPORT_NAME: "North Spirit Lake Airport",
     LOCATION: "North Spirit Lake, Ontario",
@@ -13331,7 +13325,7 @@ export const airportsInfo = [
   {
     IATACODE: "BCN",
     AIRPORT_NAME: "Barcelona El Prat Airport",
-    LOCATION: "El Prat de Llobregat",
+    LOCATION: "Barcelona",
     COUNTRY: "Spain",
   },
   {
@@ -39905,12 +39899,6 @@ export const airportsInfo = [
     AIRPORT_NAME: "Fort St. John Airport",
     LOCATION: "Fort St. John, British Columbia",
     COUNTRY: "Canada",
-  },
-  {
-    IATACODE: "YJD",
-    AIRPORT_NAME: "Barcelona Estació de França",
-    LOCATION: "Barcelona",
-    COUNTRY: "Spain",
   },
   {
     IATACODE: "AKT",
