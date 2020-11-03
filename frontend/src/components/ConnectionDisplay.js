@@ -13,6 +13,7 @@ import {
   TablePagination,
 } from "@material-ui/core";
 
+
 export const RenderConnections = ({ trip1, trip2 }) => {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
@@ -22,6 +23,7 @@ export const RenderConnections = ({ trip1, trip2 }) => {
   const [pageTrip2, setPageTrip2] = useState(0);
   const [rowsPerPageTrip1, setRowsPerPageTrip1] = useState(2);
   const [rowsPerPageTrip2, setRowsPerPageTrip2] = useState(2);
+ 
 
   useEffect(() => {
     console.log("Trip1 Found:", trip1);
@@ -31,6 +33,8 @@ export const RenderConnections = ({ trip1, trip2 }) => {
     console.log(`Connection 1 Sort by:${currentSortTrip1}`);
     setData2(currentSortTrip2);
   }, [currentSortTrip1, currentSortTrip2]);
+
+
 
   // SPLIT - FIRST CONNECTION //
   const handleSortTrip1 = (e) => {
@@ -373,12 +377,10 @@ export const RenderConnections = ({ trip1, trip2 }) => {
 
   return (
     <div className="split-container">
-      <Container>
-        <ul className="split-menu">
-          <li>{body1}</li>
-          <li>{body2}</li>
-        </ul>
-      </Container>
+          <ul className="split-menu">
+            <li>{body1}</li>
+            <li>{body2}</li>
+          </ul>
     </div>
   );
 };

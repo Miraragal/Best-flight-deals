@@ -10,6 +10,7 @@ import {
 import { Connections } from "./ConnectionsFlights";
 
 
+
 export const RenderFlights = ({
   flights,
   connections,
@@ -41,7 +42,6 @@ export const RenderFlights = ({
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(1);
   };
-
  
   const handleSort = (e) => {
     const sortTypes = {

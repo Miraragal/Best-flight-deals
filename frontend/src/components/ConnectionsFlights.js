@@ -3,7 +3,7 @@ import axios from "axios";
 import { urlGetFlights } from "../data/config";
 import { airportsInfo } from "../data/airports";
 import { RenderConnections } from "./ConnectionDisplay";
-import { Button, Container } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 export const Connections = ({
   flight,
@@ -17,6 +17,8 @@ export const Connections = ({
 }) => {
   const [trip1, setTrip1] = useState();
   const [trip2, setTrip2] = useState();
+
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     if (connections.length > 0) {
@@ -105,25 +107,30 @@ export const Connections = ({
     }, millisecondsToWait);
   };
 
+  const handleShow = () => setIsActive(!isActive);
+
   return (
     <div>
-      
-        <Button
-          className="split-button"
-          onClick={() => {
-            connectionSearch(
-              flight.itineraries
-                .map((x) => x.segments[0].arrival.iataCode)
-                .reduce((a, b) => (a.includes(b) ? a : [a, b]))
-            );
-          }}
-        >
-          Split the flight 
-        </Button>
-     
-        {trip1 && trip2 ? (
-          <RenderConnections trip1={trip1} trip2={trip2} />
-        ) : null}
+      <Button
+        className="split-button"
+        onClick={() => {
+          connectionSearch(
+            flight.itineraries
+              .map((x) => x.segments[0].arrival.iataCode)
+              .reduce((a, b) => (a.includes(b) ? a : [a, b]))
+          );
+          handleShow();
+        }}
+      >
+        {isActive ? "Hide split flight" : "Show split flight"}
+      </Button>
+      {isActive && (
+        <div>
+          {trip1 && trip2 ? (
+            <RenderConnections trip1={trip1} trip2={trip2} />
+          ) : null}
+        </div>
+      )}
     </div>
   );
 };
