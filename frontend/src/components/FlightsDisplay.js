@@ -89,11 +89,10 @@ export const RenderFlights = ({
  
 
   return (
-    <div>
-      <Container style={{ flights }}>
-        <div className="sort-fligths">
+    <div className="flights">
+        <div className="sorting">
           {!(flights.length === 0) ? (
-            <div className="icon-text">
+            <div className="flight-sorting">
               Sort by:{" "}
               <select onChange={(e) => handleSort(e.target.value)}>
                 <option value="cheapest">Cheapest</option>
@@ -108,8 +107,9 @@ export const RenderFlights = ({
                   {" "}
                   Return: Departure time
                 </option>
-              </select>
+              </select>&nbsp;
               <TablePagination
+                style={{display: "inline-flex"}}
                 rowsPerPageOptions={[5, 10, 15, 20]}
                 count={flights.length}
                 rowsPerPage={rowsPerPage}
@@ -210,7 +210,7 @@ export const RenderFlights = ({
             ))}
           </ul>
         </div>
-      </Container>
+    
     </div>
   );
 };

@@ -173,7 +173,7 @@ function SearchBox() {
             alignItems="center"
             className="labels"
           >
-            <Grid container sm={6} md={2} direction="column" spacing={1}>
+            <Grid container sm={6} md={2} xl={4} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">From:</label>
               </Grid>
@@ -194,7 +194,7 @@ function SearchBox() {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container sm={6} md={2} direction="column" spacing={1}>
+            <Grid container sm={6} md={2} xl={4} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">To:</label>
               </Grid>
@@ -215,7 +215,7 @@ function SearchBox() {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container sm={4} md={2} direction="column" spacing={1}>
+            <Grid container sm={4} md={2} xl={4} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">Depart:</label>
               </Grid>
@@ -230,7 +230,7 @@ function SearchBox() {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container sm={4} md={2} direction="column" spacing={1}>
+            <Grid container sm={4} md={2} xl={4} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">Return:</label>
               </Grid>
@@ -246,7 +246,7 @@ function SearchBox() {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container sm={3} md={2} direction="column" spacing={1}>
+            <Grid container sm={3} md={2} xl={4} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">Passengers:</label>
               </Grid>
