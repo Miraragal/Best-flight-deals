@@ -26,8 +26,6 @@ import { airportsInfo } from "../data/airports";
 import { urlGetFlights } from "../data/config";
 import { RenderFlights } from "./FlightsDisplay";
 
-
-
 function SearchBox() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -174,10 +172,8 @@ function SearchBox() {
             justify="space-between"
             alignItems="center"
             className="labels"
-            spacing={1}
-            style={{ margin: 10 }}
           >
-            <Grid container xs={2} direction="column" spacing={1}>
+            <Grid container sm={6} md={2} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">From:</label>
               </Grid>
@@ -198,8 +194,7 @@ function SearchBox() {
                 </FormControl>
               </Grid>
             </Grid>
-
-            <Grid container xs={2} direction="column" spacing={1}>
+            <Grid container sm={6} md={2} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">To:</label>
               </Grid>
@@ -220,34 +215,38 @@ function SearchBox() {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container xs={2} direction="column" spacing={1}>
+            <Grid container sm={4} md={2} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">Depart:</label>
               </Grid>
               <Grid item>
-                <OutlinedInput
-                  className="inputBoxes"
-                  type="date"
-                  defaultValue=""
-                  onChange={(input) => setDepartDate(input.target.value)}
-                />
+                <FormControl>
+                  <OutlinedInput
+                    className="inputBoxes"
+                    type="date"
+                    defaultValue=""
+                    onChange={(input) => setDepartDate(input.target.value)}
+                  />
+                </FormControl>
               </Grid>
             </Grid>
-            <Grid container xs={2} direction="column" spacing={1}>
+            <Grid container sm={4} md={2} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">Return:</label>
               </Grid>
               <Grid item>
-                <OutlinedInput
-                  className="inputBoxes"
-                  type="date"
-                  disabled={returnInput}
-                  defaultValue=""
-                  onChange={(input) => setReturnDate(input.target.value)}
-                />
+                <FormControl>
+                  <OutlinedInput
+                    className="inputBoxes"
+                    type="date"
+                    disabled={returnInput}
+                    defaultValue=""
+                    onChange={(input) => setReturnDate(input.target.value)}
+                  />
+                </FormControl>
               </Grid>
             </Grid>
-            <Grid container xs={2} direction="column" spacing={1}>
+            <Grid container sm={3} md={2} direction="column" spacing={1}>
               <Grid item>
                 <label htmlFor="labels">Passengers:</label>
               </Grid>
@@ -266,15 +265,13 @@ function SearchBox() {
               </Grid>
             </Grid>
           </Grid>
-
-          <Grid container direction="row" alignItems="center" spacing={1}>
-            <Grid
-              container
-              direction="row"
-              xs={4}
-              spacing={1}
-              style={{ marginLeft: 10 }}
-            >
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+          >
+            <Grid container sm={6} spacing={1}>
               <Grid item>
                 <RadioGroup row defaultValue="return">
                   <FormControlLabel
@@ -296,12 +293,14 @@ function SearchBox() {
 
             <Grid
               container
-              xs={8}
+              sm={6}
+              md={6}
               direction="row"
-              spacing={1}
               justify="flex-end"
+              alignItems="center"
+              spacing={1}
             >
-              <Grid item className="icon-text" style={{ marginRight: 10 }}>
+              <Grid item className="icon-text">
                 <Link to="/favorites">
                   <IconButton>
                     <FontAwesomeIcon icon={faHeart} className="heart-button" />
@@ -310,7 +309,7 @@ function SearchBox() {
                 Go to your flights
               </Grid>
 
-              <Grid item style={{ marginRight: 26 }}>
+              <Grid item>
                 <Button
                   className="search-button"
                   type="search"
@@ -340,7 +339,6 @@ function SearchBox() {
           token={token}
         />
       </div>
-      
     </div>
   );
 }

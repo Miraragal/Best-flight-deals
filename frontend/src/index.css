@@ -9,10 +9,10 @@ body {
 .landingPage {
   height: 100vh;
   background-image: url("/images/background/kenrick-mills-MF9Wy1NA55I-unsplash 2.png");
-  padding: 148px 80px 40px 80px;
+  padding: 10% 5% 5% 5%;
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   box-sizing: border-box;
 }
 
@@ -32,7 +32,7 @@ h2 {
   text-align: left;
   text-transform: uppercase;
   color: #143e52;
-  margin-bottom: 60px;
+  margin-bottom: 2.5%;
 }
 
 /* // SEARCH BOX // */
@@ -48,8 +48,8 @@ h2 {
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   border-radius: 20px;
   padding: 30px 30px 30px 30px;
-  height: 285px;
-  margin-top: 100px;
+  min-height: 285px;
+  max-height: max-content;
 }
 .labels {
   font-family: Futura;
@@ -58,19 +58,21 @@ h2 {
   font-size: 16px;
   line-height: 21px;
   text-transform: uppercase;
-  color: #143e52;
+  color: rgb(20, 62, 82);
   text-align: left;
 }
 .inputBoxes {
-  min-width: 200px;
-  height: 58px;
+  max-width: 200px;
+  width: auto;
   cursor: pointer;
   background-color: #ffffff;
   border: solid 1px #143e52;
 }
+
 .inputPassenger {
-  min-width: 168px;
-  height: 58px;
+  max-width: 200px;
+  width: 100%;
+  justify-content: right !important;
   cursor: pointer;
   background-color: #ffffff;
   border: solid 1px #143e52;
@@ -95,8 +97,9 @@ h2 {
 }
 .search-button {
   cursor: pointer;
-  width: 200px;
   height: 58px;
+  max-width: 200px;
+  width: 100%;
   font-family: Futura !important;
   background-color: #143e52 !important;
   color: white !important;
@@ -124,7 +127,6 @@ select {
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   padding: 5px 10px 5px 10px;
   margin-bottom: 12px;
-
 }
 li {
   list-style-type: none;
@@ -162,8 +164,8 @@ h5 {
   color: #143e52;
 }
 .container {
- display: inline-flex;
- grid-template-columns: auto auto auto;
+  display: inline-flex;
+  grid-template-columns: auto auto auto;
   padding: 1px;
   grid-gap: 10px;
   text-align: left;
@@ -175,7 +177,6 @@ h5 {
   height: auto;
   padding-right: 50px;
   margin-left: 10px;
- 
 }
 .part1 {
   font-size: 16px;
@@ -197,7 +198,6 @@ h5 {
   letter-spacing: 2px;
 }
 .item {
- 
   margin-top: 50px;
   padding: 0px;
 }
@@ -209,7 +209,6 @@ h3 {
   line-height: 32px;
   /* identical to box height */
   color: #143e52;
-
 }
 h6 {
   font-family: Futura;
@@ -218,7 +217,6 @@ h6 {
   font-size: 16px;
   line-height: 21px;
   color: #43697e;
-  
 }
 .select-button {
   width: 175px;
@@ -249,51 +247,50 @@ h6 {
 }
 
 /* // FLIGHTS SPLIT RESULT // */
-.split-container{
+.split-container {
   padding: 1px;
   float: none;
-  position: relative; 
+  position: relative;
   right: 70%;
 }
 .split-menu {
-  display: flex; 
+  display: flex;
 }
 .split-table {
   border-radius: 20px;
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   padding: 0px 10px 10px 10px;
-  background-color: rgba(67,105,126,0.75);
-
+  background-color: rgba(67, 105, 126, 0.75);
 }
-.split-cell{
+.split-cell {
   font-family: Futura !important;
   color: #ffffff !important;
 }
-.split-header{
-border-bottom: 4px solid #ADC0C9;
-align-content: center;
-text-align: center;
+.split-header {
+  border-bottom: 4px solid #adc0c9;
+  align-content: center;
+  text-align: center;
 }
-.split-sort{
+.split-sort {
   font-family: Futura !important;
   color: #43697e !important;
   border: 1px solid #43697e !important;
-  box-sizing: border-box !important; 
+  box-sizing: border-box !important;
   width: fit-content;
   background-color: #e9eef0;
   margin-top: 0px;
   height: min-content;
 }
-.split-rows{
+.split-rows {
   font-family: Futura !important;
   border: 0px !important;
-  color: #43697e!important;
+  color: #43697e !important;
 }
-.split-select{
+.split-select {
   font-family: Futura !important;
   color: #43697e !important;
   border: 1px solid #43697e !important;
-  box-sizing: border-box !important; 
+  box-sizing: border-box !important;
   margin-top: 50px !important;
   background-color: #e9eef0 !important;
 }
