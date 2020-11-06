@@ -147,20 +147,20 @@ li {
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   border-radius: 20px;
   padding: 15px 20px 15px 20px;
-
   justify-self: center;
+  
 }
 .flight-container {
   display: inline-flex;
   /* grid-template-columns: 33% 33% 33%; */
   align-items: center;
   justify-items: center;
+ 
 }
 .itineraries {
   border-right: 1px solid #adc0c9;
   margin-right: 3px;
   margin-left: 3px;
-
 }
 h4 {
   font-family: Futura;
@@ -253,32 +253,32 @@ h6 {
   box-sizing: border-box !important;
   border-radius: 10px;
   margin-top: 4% !important;
-  float: none;
 }
 .split-button:hover {
   color: #f2bf5d !important;
 }
 
 /* // FLIGHTS SPLIT RESULT // */
-
 .split-container {
-  padding: 2px;
-  float:relative;
+  position: absolute;
+  display: inline-block;
+  right: 9%;
+  margin: 1% 0% 1% 0%;
+  z-index: 10;
 }
-.split-menu {
-  display: flex;
-  margin-top: 1px !important;
-}
-
 .split-table {
   border-radius: 20px;
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
   padding: 0% 2% 2% 2%;
-  background-color: rgba(67, 105, 126, 0.75);
+  background-color: rgba(67, 105, 126, 1);
+}
+.split-menu {
+  display: flex;
+  margin-top: 0.5px !important;
 }
 .MuiTableCell-root {
   padding: 5px !important;
-  margin: 10px !important;
+  margin: 5px !important;
   text-align: left !important;
   line-height: 1.2 !important;
   font-family: Futura !important;
@@ -288,9 +288,7 @@ h6 {
 }
 .split-header {
   border-bottom: 3px solid #adc0c9;
-  align-content: center;
-  text-align: center;
-  font-family: Futura;
+  text-align:center;
 }
 .split-sort {
   font-family: Futura !important;
@@ -305,13 +303,10 @@ h6 {
 }
 .MuiTablePagination-root {
   font-family: Futura !important;
-  font-size: 10px !important;
-  color: #43697e !important;
+  font-size: 12px !important;
+  color: #143e52 !important;
   border-bottom: 0px  !important;
-  justify-items: center !important;
-  /* margin-left: 1px !important; */
 }
-
 .split-select {
   font-family: Futura !important;
   font-size: 12px !important;
@@ -320,9 +315,7 @@ h6 {
   box-sizing: border-box !important;
   background-color: #e9eef0 !important;
   margin-top: 40% !important;
-  
-
-
+  right: 9%;
 }
 .split-select:hover {
   color: #f2bf5d !important;

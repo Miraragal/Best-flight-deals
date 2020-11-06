@@ -128,9 +128,10 @@ export const Connections = ({
         <div>
           {trip1 && trip2 ? (
             <RenderConnections trip1={trip1} trip2={trip2} />
-          ) : null}
+            ) : null}
         </div>
       )}
+     
     </div>
   );
 };

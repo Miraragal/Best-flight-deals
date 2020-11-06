@@ -9,7 +9,6 @@ import {
   TableContainer,
   TableRow,
   TableHead,
-  Container,
   TablePagination,
 } from "@material-ui/core";
 
@@ -93,11 +92,11 @@ export const RenderConnections = ({ trip1, trip2 }) => {
       <TableContainer className="split-table">
         <Table>
           <TableHead className="split-header">
-            <h3 style={{ textAlign: "center", marginBottom: "1" }}>
+            <h4 style={{ textAlign: "center", marginBottom: "1" }}>
               Outbound Connections: &nbsp;
               {trip1[0].itineraries[0].segments[0].departure.iataCode}-
               {trip1[0].itineraries[0].segments[0].arrival.iataCode}
-            </h3>
+            </h4>
             <p style={{ fontSize: "10" }}>
               Sort by:
               <select
@@ -263,11 +262,11 @@ export const RenderConnections = ({ trip1, trip2 }) => {
       <TableContainer className="split-table">
         <Table>
           <TableHead className="split-header">
-            <h3 style={{ textAlign: "center", marginBottom: "1" }}>
+            <h4 style={{ textAlign: "center", marginBottom: "1" }}>
               Outbound Connections: &nbsp;
               {trip2[0].itineraries[0].segments[0].departure.iataCode}-
               {trip2[0].itineraries[0].segments[0].arrival.iataCode}
-            </h3>
+            </h4>
             <p style={{ fontSize: "10" }}>
               Sort by:
               <select
