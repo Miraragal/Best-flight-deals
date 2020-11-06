@@ -24,7 +24,7 @@ export const RenderFlights = ({
   const [data, setData] = useState([]);
   const [currentSort, setCurrentSort] = useState("cheapest");
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(4);
 
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export const RenderFlights = ({
     setPage(newPage);
   };
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value));
     setPage(1);
   };
  
@@ -110,7 +110,7 @@ export const RenderFlights = ({
               </select>&nbsp;
               <TablePagination
                 style={{display: "inline-flex"}}
-                rowsPerPageOptions={[5, 10, 15, 20]}
+                rowsPerPageOptions={[4, 8, 12, 16]}
                 count={flights.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
@@ -125,8 +125,8 @@ export const RenderFlights = ({
           <ul> 
           {flights.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((flight) => (
               <li key={flight.id}>
-                <div className="card">
-                  <div className="container">
+                <div className='flight-card'>
+                  <div className="flight-container">
                     {flight.itineraries.map((itinerary, index) => (
                       <li>
                         <div className="itineraries">
@@ -144,13 +144,13 @@ export const RenderFlights = ({
                           <div className="trip-body">
                             {itinerary.segments.map((segment) => (
                               <li key={segment.id}>
-                                <div className="part1">
+                                <div className="trip-part1">
                                   {/* horas */}
                                   {segment.departure.at.slice(11, 16)}h&nbsp;
                                   {segment.arrival.at.slice(11, 16)}h
                                 </div>
                                 {/* icon */}
-                                <div className="part2">
+                                <div className="trip-part2">
                                   <FontAwesomeIcon
                                     icon={faPlane}
                                     style={{
@@ -165,24 +165,23 @@ export const RenderFlights = ({
                                     .replace("H", "h")
                                     .replace("M", "")}
                                 </div>
-                                <div className="part3">
+                                <div className="trip-part3">
                                   {/* airports */}
                                   {segment.departure.iataCode}&nbsp;
                                   {segment.arrival.iataCode}
                                 </div>
-                                <br />
                               </li>
                             ))}
                           </div>
                         </div>
                       </li>
                     ))}
-                    <div className="item">
+                    <div className="trip-price">
                       <h3>
                         {flight.price.total}
                         {flight.price.currency}
                       </h3>
-                      <Button className="select-button" variant="contained">
+                      <Button className="trip-select-button" variant="contained">
                         Select
                       </Button>
 
@@ -205,7 +204,7 @@ export const RenderFlights = ({
                       ) : null}
                     </div>
                   </div>
-                </div>
+                  </div>
               </li>
             ))}
           </ul>

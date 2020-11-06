@@ -12,8 +12,8 @@ body {
   padding: 10% 5% 5% 5%;
   background-size: cover;
   background-position: center center;
-  /* background-attachment: fixed; */
-  /* position: relative; */
+  background-attachment: fixed;
+  /* position: absolute; */
   box-sizing: border-box;
 }
 /* //HEADERS // **/
@@ -51,7 +51,7 @@ h2 {
   min-height: 285px;
   max-height: max-content;
 }
-.whiteBox:after{
+.whiteBox:after {
   padding-bottom: 399px;
 }
 .labels {
@@ -91,7 +91,7 @@ h2 {
   color: #f2bf5d;
 }
 .icon-text {
-  font-family: Futura ;
+  font-family: Futura;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -113,18 +113,17 @@ h2 {
 }
 
 /* // FLIGHTS 1st.RESULT // */
-.flights{
-  position: relative;
+.flights {
+  /* position: relative; */
   margin-top: 5%;
-  justify-content: center;
 }
 .flight-sorting {
   font-family: Futura !important;
   font-style: normal;
-  font-weight: 500;
   font-size: 16px;
   line-height: 21px;
   color: #143e52 !important;
+  text-align: center;
 }
 select {
   height: 48px;
@@ -137,125 +136,122 @@ select {
   font-size: 12px;
   margin: 2% 1% 2% 1%;
 }
-.card {
-  background: linear-gradient(0deg, #ffffff, #ffffff);
-  border-radius: 20px;
-  box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25); 
-  padding: 1% 1% 1% 1%; 
-  margin-bottom: 1%;
-  text-align: left;  
-  width: fit-content;
-}
 li {
   list-style-type: none;
-  display: inline-grid;
-  
+  display: inline-block;
+  margin: 1%;
 }
-.container {
-  display: inline-grid;
-  grid-template-columns: 35% 35% 30%;
-  padding: 1%;
-  grid-gap: 1%;
-  text-align: left;
+.flight-card {
+  display: inline-flex;
+  background: linear-gradient(0deg, #ffffff, #ffffff);
+  box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
+  border-radius: 20px;
+  padding: 15px 20px 15px 20px;
+
+  justify-self: center;
+}
+.flight-container {
+  display: inline-flex;
+  /* grid-template-columns: 33% 33% 33%; */
   align-items: center;
   justify-items: center;
-  max-width: auto;
-  margin-left: 2%;
-  margin-right: 2%;
-  
 }
-/* .itineraries {
+.itineraries {
   border-right: 1px solid #adc0c9;
-  height: auto;
-  margin-left: 5%;
-} */
+  margin-right: 3px;
+  margin-left: 3px;
+}
 h4 {
   font-family: Futura;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   color: #f2bf5d;
 }
 h5 {
   font-family: Futura;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 12px;
   color: #43697e;
-  word-spacing: 3.19vw;
-  letter-spacing: 2px;
-  margin-bottom: 5%;
-  margin-top: 2%;
+  word-spacing: 1.19vw;
+  letter-spacing: 0.2px;
 }
 .trip-body {
   font-family: Futura;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
   color: #143e52;
 }
-
-.part1 {
-  font-size: 16px;
-  text-align: left;
-  word-spacing: 10.19vw;
-  letter-spacing: 2px;
-}
-.part2 {
-  font-size: 12px;
+.trip-part1 {
+  font-size: 10px;
+  letter-spacing: 1pt;
+  word-spacing: 12pt; /* para separacion entre palabras */
   text-align: center;
-  word-spacing: 0.29vw;
-  font-weight: normal !important;
+  line-height: 8pt; /* para la separacion entre lineas */
+  text-indent: 1.5t;
+  margin-bottom: 10px;
 }
-.part3 {
-  font-size: 23px;
-  text-align: left;
-  word-spacing: 11.29vw;
-  letter-spacing: 2px;
+.trip-part2 {
+  font-size: 8px;
+  font-weight: normal;
+  word-spacing: 1pt; /* para separacion entre palabras */
+  text-align: center;
+  line-height: 8pt; /* para la separacion entre lineas */
+  margin-bottom: 10px;
 }
-.item {
+.trip-part3 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  word-spacing: 20pt;
+  line-height: 8pt;
+  text-indent: 4pt;
+  margin-bottom: 15px;
+}
+.trip-price {
+  text-align: center;
   margin-top: 50px;
-  padding: 0px;
+  margin-left: 1%;
+  margin-right: 2%;
 }
 h3 {
   font-family: Futura;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 32px;
-  /* identical to box height */
+  font-size: 18px;
+  text-align: center;
   color: #143e52;
 }
 h6 {
   font-family: Futura;
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 21px;
+  font-size: 12px !important;
+  text-align: center;
   color: #43697e;
+  margin-top: 15%;
 }
-.select-button {
-  width: 175px;
-  height: 58px;
+.trip-select-button {
+  width: 100%;
+  height: 68%;
   font-family: Futura !important;
   background-color: #143e52 !important;
   color: white !important;
 }
-.select-button:hover {
+.trip-select-button:hover {
   color: #f2bf5d !important;
 }
 .split-button {
+  width: 100%;
+  height: 68%;
   font-family: Futura;
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 26px;
-  text-align: center;
+  font-size: 8px !important;
   color: #43697e !important;
   border: 1px solid #43697e !important;
   box-sizing: border-box !important;
   border-radius: 10px;
-  margin-top: 10px !important;
+  margin-top: 4% !important;
   float: none;
 }
 .split-button:hover {
