@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   InputLabel,
-  Container,
   TablePagination,
 } from "@material-ui/core";
 import { Connections } from "./ConnectionsFlights";
@@ -109,7 +108,7 @@ export const RenderFlights = ({
                 </option>
               </select>&nbsp;
               <TablePagination
-                style={{display: "inline-flex"}}
+                style={{display: "inline-flex",color: "#143e52", fontSize:'16px'}}
                 rowsPerPageOptions={[4, 8, 12, 16]}
                 count={flights.length}
                 rowsPerPage={rowsPerPage}
