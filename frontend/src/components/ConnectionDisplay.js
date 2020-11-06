@@ -93,7 +93,7 @@ export const RenderConnections = ({ trip1, trip2 }) => {
       <TableContainer className="split-table">
         <Table>
           <TableHead className="split-header">
-            <h3 style={{ textAlign: "center", marginBottom: "10" }}>
+            <h3 style={{ textAlign: "center", marginBottom: "1" }}>
               Outbound Connections: &nbsp;
               {trip1[0].itineraries[0].segments[0].departure.iataCode}-
               {trip1[0].itineraries[0].segments[0].arrival.iataCode}
@@ -116,7 +116,6 @@ export const RenderConnections = ({ trip1, trip2 }) => {
                 </option>
               </select>
               <TablePagination
-                className="split-rows"
                 rowsPerPageOptions={[2, 4, 8, 16]}
                 count={trip1.length}
                 rowsPerPage={rowsPerPageTrip1}
@@ -126,8 +125,8 @@ export const RenderConnections = ({ trip1, trip2 }) => {
               />
             </p>
           </TableHead>
-          <TableRow style={{ marginBottom: "10" }}>
-            {trip1
+          <TableRow style={{ marginBottom: "1" }}>
+            {trip2
               .slice(
                 pageTrip1 * rowsPerPageTrip1,
                 pageTrip1 * rowsPerPageTrip1 + rowsPerPageTrip1
@@ -138,16 +137,16 @@ export const RenderConnections = ({ trip1, trip2 }) => {
                     <li>
                       <TableCell
                         className="split-cell"
-                        style={{ marginTop: "10" }}
+                       
                       >
-                        <InputLabel style={{ marginTop: "10" }}>
+                        <InputLabel>
                           {index === 0 ? (
                             <h4 style={{ textAlign: "left" }}>Outbound</h4>
                           ) : (
                             <h4 style={{ textAlign: "left" }}>Return</h4>
                           )}
                         </InputLabel>
-                        <p style={{ fontSize: "10px" }}>
+                        <p style={{ fontSize: "12px" }}>
                           Duration:
                           {itinerary.duration
                             .slice(2, itinerary.duration.length)
@@ -204,6 +203,7 @@ export const RenderConnections = ({ trip1, trip2 }) => {
       </TableContainer>
     </ul>
   );
+
   // SPLIT - SECOND CONNECTION //
   const handleSortTrip2 = (e) => {
     const sortTypes = {
@@ -263,7 +263,7 @@ export const RenderConnections = ({ trip1, trip2 }) => {
       <TableContainer className="split-table">
         <Table>
           <TableHead className="split-header">
-            <h3 style={{ textAlign: "center", marginBottom: "10" }}>
+            <h3 style={{ textAlign: "center", marginBottom: "1" }}>
               Outbound Connections: &nbsp;
               {trip2[0].itineraries[0].segments[0].departure.iataCode}-
               {trip2[0].itineraries[0].segments[0].arrival.iataCode}
@@ -286,7 +286,6 @@ export const RenderConnections = ({ trip1, trip2 }) => {
                 </option>
               </select>
               <TablePagination
-                className="split-rows"
                 rowsPerPageOptions={[2, 4, 8, 16]}
                 count={trip2.length}
                 rowsPerPage={rowsPerPageTrip2}
@@ -296,7 +295,7 @@ export const RenderConnections = ({ trip1, trip2 }) => {
               />
             </p>
           </TableHead>
-          <TableRow style={{ marginBottom: "10" }}>
+          <TableRow style={{ marginBottom: "1" }}>
             {trip2
               .slice(
                 pageTrip2 * rowsPerPageTrip2,
@@ -308,16 +307,16 @@ export const RenderConnections = ({ trip1, trip2 }) => {
                     <li>
                       <TableCell
                         className="split-cell"
-                        style={{ marginTop: "10" }}
+                       
                       >
-                        <InputLabel style={{ marginTop: "10" }}>
+                        <InputLabel>
                           {index === 0 ? (
                             <h4 style={{ textAlign: "left" }}>Outbound</h4>
                           ) : (
                             <h4 style={{ textAlign: "left" }}>Return</h4>
                           )}
                         </InputLabel>
-                        <p style={{ fontSize: "10px" }}>
+                        <p style={{ fontSize: "12px" }}>
                           Duration:
                           {itinerary.duration
                             .slice(2, itinerary.duration.length)

@@ -294,7 +294,6 @@ function SearchBox() {
             <Grid
               container
               sm={6}
-              md={6}
               direction="row"
               justify="flex-end"
               alignItems="center"

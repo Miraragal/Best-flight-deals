@@ -160,6 +160,7 @@ li {
   border-right: 1px solid #adc0c9;
   margin-right: 3px;
   margin-left: 3px;
+
 }
 h4 {
   font-family: Futura;
@@ -259,52 +260,69 @@ h6 {
 }
 
 /* // FLIGHTS SPLIT RESULT // */
+
 .split-container {
-  padding: 1px;
-  float: none;
-  position: relative;
-  right: 70%;
+  padding: 2px;
+  float:relative;
 }
 .split-menu {
   display: flex;
+  margin-top: 1px !important;
 }
+
 .split-table {
   border-radius: 20px;
   box-shadow: 0px 2px 30px 19px rgba(173, 192, 201, 0.25);
-  padding: 0px 10px 10px 10px;
+  padding: 0% 2% 2% 2%;
   background-color: rgba(67, 105, 126, 0.75);
 }
-.split-cell {
+.MuiTableCell-root {
+  padding: 5px !important;
+  margin: 10px !important;
+  text-align: left !important;
+  line-height: 1.2 !important;
   font-family: Futura !important;
   color: #ffffff !important;
+  font-size: 12px !important;
+  border-bottom: 0px  !important;
 }
 .split-header {
-  border-bottom: 4px solid #adc0c9;
+  border-bottom: 3px solid #adc0c9;
   align-content: center;
   text-align: center;
+  font-family: Futura;
 }
 .split-sort {
   font-family: Futura !important;
+  font-size: 12px !important;
   color: #43697e !important;
   border: 1px solid #43697e !important;
-  box-sizing: border-box !important;
-  width: fit-content;
   background-color: #e9eef0;
-  margin-top: 0px;
-  height: min-content;
+  box-sizing: border-box !important;
+  width: fit-content !important; 
+  height: min-content !important; 
+  margin:1px !important; 
 }
-.split-rows {
+.MuiTablePagination-root {
   font-family: Futura !important;
-  border: 0px !important;
+  font-size: 10px !important;
   color: #43697e !important;
+  border-bottom: 0px  !important;
+  justify-items: center !important;
+  /* margin-left: 1px !important; */
 }
+
 .split-select {
   font-family: Futura !important;
+  font-size: 12px !important;
   color: #43697e !important;
   border: 1px solid #43697e !important;
   box-sizing: border-box !important;
-  margin-top: 50px !important;
   background-color: #e9eef0 !important;
+  margin-top: 40% !important;
+  
+
+
 }
 .split-select:hover {
   color: #f2bf5d !important;
