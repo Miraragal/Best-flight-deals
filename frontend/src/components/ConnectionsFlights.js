@@ -17,8 +17,9 @@ export const Connections = ({
 }) => {
   const [trip1, setTrip1] = useState();
   const [trip2, setTrip2] = useState();
-
   const [isActive, setIsActive] = useState(false);
+
+
 
   useEffect(() => {
     if (connections.length > 0) {
@@ -124,10 +125,11 @@ export const Connections = ({
       >
         {isActive ? "Hide split flight" : "Show split flight"}
       </Button>
+
       {isActive && (
         <div>
           {trip1 && trip2 ? (
-            <RenderConnections trip1={trip1} trip2={trip2} />
+            <RenderConnections  trip1={trip1} trip2={trip2} />
             ) : null}
         </div>
       )}

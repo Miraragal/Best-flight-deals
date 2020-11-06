@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { faPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,16 +22,25 @@ export const RenderConnections = ({ trip1, trip2 }) => {
   const [pageTrip2, setPageTrip2] = useState(0);
   const [rowsPerPageTrip1, setRowsPerPageTrip1] = useState(2);
   const [rowsPerPageTrip2, setRowsPerPageTrip2] = useState(2);
+  const [isLoading, setIsLoading] = useState(true);
+  let mySplit = useRef();
  
 
   useEffect(() => {
+    if (mySplit.current) {
+      window.scrollTo({
+        behavior: "smooth",
+        top: mySplit.current.offsetTop,
+      });
+    }
     console.log("Trip1 Found:", trip1);
     console.log("Trip2 Found:", trip2);
     console.log(`Connection 2 Sort by:${currentSortTrip2}`);
     setData1(currentSortTrip1);
     console.log(`Connection 1 Sort by:${currentSortTrip1}`);
     setData2(currentSortTrip2);
-  }, [currentSortTrip1, currentSortTrip2]);
+   
+  }, [isLoading, currentSortTrip1, currentSortTrip2,]);
 
 
 
@@ -374,11 +383,13 @@ export const RenderConnections = ({ trip1, trip2 }) => {
   );
 
   return (
+    <div ref={mySplit}>
     <div className="split-container">
           <ul className="split-menu">
             <li>{body1}</li>
             <li>{body2}</li>
           </ul>
+    </div>
     </div>
   );
 };
