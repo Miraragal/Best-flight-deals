@@ -1,5 +1,4 @@
 # Best-flight-deals
-
 ![JavaScript](https://img.shields.io/badge/-JavaScript-black?style=flat-square&logo=javascript) 
 ![MaterialUI](https://img.shields.io/badge/-MaterialUI-563D7C?style=flat-square&logo=materialui)
 ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=css3)
@@ -15,17 +14,9 @@ This is a standalone app based on [ReactJs](https://reactjs.org/) on frontend. I
 ![LandingPage](https://github.com/Miraragal/Best-flight-deals/blob/main/frontend/public/ezgif.com-gif-maker.gif) 
 
 ## Requirements
-This app using [Travelpayouts flights search API](https://www.travelpayouts.com/developers/api), to access the flights search API you should be registered in our travel affiliate program and submit your request on [support@travelpayouts.com](mailto:support@travelpayouts.com) with the following information:
+This app using [Amadeus Self-Service API](https://developers.amadeus.com/get-started/get-started-with-self-service-apis-335), to access to Amadeus Self-Service APIs you should be registered. After granting access, you need to get your **API Token** [here](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262).This token will identify you as valid user and is generated from two parameters: **API Key and API Secret**.
 
-* URL of your website;
-* Design prototypes of search result;
-* Description of your project;
-* How you will use the search API?
-* Why aren’t the standard methods of integration ([search forms](https://support.travelpayouts.com/hc/en-us/articles/203638588-Search-form), [White Label](https://support.travelpayouts.com/hc/en-us/categories/115000474487), [API access to data](https://support.travelpayouts.com/hc/en-us/articles/203956163-Travel-insights-with-Travelpayouts-Data-API)) suitable for you. 
-
-**[More information about flights search api](https://support.travelpayouts.com/hc/en-us/categories/200358578)**
-
-After granting access to [Travelpayouts flight search Api](https://support.travelpayouts.com/hc/en-us/sections/200989107-Flights-search-API) you need to get your **api token** and **marker** [here](https://www.travelpayouts.com/developers/api).
+[Amadeus search API](https://developers.amadeus.com/self-service/category/air/api-doc/flight-offers-search/api-reference)
 
 ![](https://habrastorage.org/web/b53/770/96e/b5377096e4dc473ba09ad67b21c8d198.png)
 
