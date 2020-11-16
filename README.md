@@ -7,11 +7,11 @@
 ![Nodejs](https://img.shields.io/badge/-NodeJS-black?style=flat-square&logo=Node.js)
 ![VSCode](https://img.shields.io/badge/-VS_Code-007ACC?style=flat-square&logo=visual-studio-code)
 
-Search flights from the command line!
+Allows users to browse global flights and compare the results of a round trip to individual legs with one click.
 
-This is a standalone app based on [Yii2](http://www.yiiframework.com/) on backend and [angularJs](https://angularjs.org/) on frontend. It uses [Travelpayouts api](https://support.travelpayouts.com/hc/en-us/categories/200358578) for retrieving flights information and view search results on a domain or subdomain of your site. 
+This is a standalone app based on [ReactJs](https://reactjs.org/) on frontend. It uses [Amadeus api](https://developers.amadeus.com/) for retrieving flights information and view search results on a domain or subdomain of your site. 
 
-#### [Check out our demo](http://misc.travelpayouts.com/flights/)
+#### [Check out demo](https://github.com/Miraragal/Best-flight-deals/blob/main/frontend/public/ezgif.com-gif-maker.gif) 
 ![LandingPage](https://github.com/Miraragal/Best-flight-deals/blob/main/frontend/public/ezgif.com-gif-maker.gif) 
 
 ## Requirements
@@ -36,18 +36,6 @@ Download and unzip package or clone it to your web folder `git clone https://git
 
 Use [composer](https://getcomposer.org/) to install dependencies.
 
-### Installing Composer
-
-If you do not already have Composer installed, you may do so by following the instructions at getcomposer.org. On Linux and Mac OS X, you'll run the following commands
-
-```
-curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
-```
-On Windows, you'll download and run [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe).
-
-### Installing Composer packages
-Just use command `composer install`.
 
 ### Changing your app parameters
 Before first running of your app, you need to set app params. All your params is located in **config/params.php**
