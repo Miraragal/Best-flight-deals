@@ -16,32 +16,20 @@ This is a standalone app based on [ReactJs](https://reactjs.org/) on frontend. I
 ## Requirements
 This app using [Amadeus Self-Service API](https://developers.amadeus.com/get-started/get-started-with-self-service-apis-335), to access to Amadeus Self-Service APIs you should be registered. After granting access, you need to get your **API Token** [here](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262).This token will identify you as valid user and is generated from two parameters: **API Key and API Secret**.
 
-[Amadeus search API](https://developers.amadeus.com/self-service/category/air/api-doc/flight-offers-search/api-reference)
-
-![](https://habrastorage.org/web/b53/770/96e/b5377096e4dc473ba09ad67b21c8d198.png)
-
 
 ## Installation
 
-Download and unzip package or clone it to your web folder `git clone https://github.com/travelpayouts/flights-api-project.git`
-
-Use [composer](https://getcomposer.org/) to install dependencies.
+Download and unzip package or clone it to your web folder `git clone https://github.com/Miraragal/Best-flight-deals`
 
 
 ### Changing your app parameters
-Before first running of your app, you need to set app params. All your params is located in **config/params.php**
+Before first running of your app, you need to set app params. All your params is located in **config.js**
 
 ```
-return [
-    'adminEmail' => 'admin@example.com',
-    'apiToken'=> '', // Token https://www.travelpayouts.com/developers/api
-    'apiMarker'=> '', // Marker https://www.travelpayouts.com/developers/api
-    'apiResponseLang'=> 'en', // Response language : en,ru,de,es,fr,it,pl,th.
-    'title'=> 'TravelPayouts sample app', // Title of your app
-    'baseUrl'=> '/flights-api-project' // Path of your app (for example: if your project url is http//site.com/flight set 'baseUrl'=> '/flights', if it in root directory set 'baseUrl'=> '/'
-];
+ clientId= 'Client Id'
+ clientSecret='Client Secret'
+ url='https://test.api.amadeus.com/v1/security/oauth2/token'
+ urlGetFlights= 'https://test.api.amadeus.com/v2/shopping/flight-offers'
+
 ```
 
-### Setting webserver 
-* [Apache HTTP server](http://httpd.apache.org/) users have all needed .htaccess files out of box. 
-* [Nginx HTTP server](http://nginx.org/) users should install PHP as an [FPM SAPI](http://php.net/install.fpm). You may use the following Nginx configuration, replacing `path/to/basic/web` with the actual path for `basic/web` and `mysite.local` with the actual hostname to serve.
