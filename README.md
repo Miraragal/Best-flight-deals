@@ -10,14 +10,17 @@ Allows users to browse global flights and compare the results of a round trip to
 
 This is a standalone app based on [ReactJs](https://reactjs.org/) on frontend. It uses [Amadeus api](https://developers.amadeus.com/) for retrieving flights information and view search results on a domain or subdomain of your site. 
 
+
 #### [Check out demo](https://github.com/Miraragal/Best-flight-deals/blob/main/frontend/public/ezgif.com-gif-maker.gif) 
 ![LandingPage](https://github.com/Miraragal/Best-flight-deals/blob/main/frontend/public/ezgif.com-gif-maker.gif) 
+
+
 
 ## Requirements
 This app using [Amadeus Self-Service API](https://developers.amadeus.com/get-started/get-started-with-self-service-apis-335), to access to Amadeus Self-Service APIs you should be registered. After granting access, you need to get your **API Token** [here](https://developers.amadeus.com/self-service/apis-docs/guides/authorization-262).This token will identify you as valid user and is generated from two parameters: **API Key and API Secret**.
 
 
-## Installation
+### Installation
 
 Download and unzip package or clone it to your web folder `git clone https://github.com/Miraragal/Best-flight-deals`
 
